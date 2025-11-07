@@ -1,0 +1,116 @@
+@page "/assessment/{CategoryId}"
+@using BlazorApp.Shared.EmpathyAssessment
+@inject NavigationManager Nav
+
+@code {
+    [Parameter] public string CategoryId { get; set; }
+    private EmpathyCategory category;
+    private Dictionary<string, bool?> answers = new Dictionary<string, bool?>();
+    private bool showResults;
+
+    protected override void OnParametersSet()
+    {
+        category = CategoryId == null ? null : AssessmentData.GetById(CategoryId);
+        if (category != null && answers.Count == 0)
+        {
+            foreach (var q in category.Questions)
+            {
+                answers[q.Text] = null; // unanswered
+            }
+        }
+    }
+
+    private int TotalAnswered => answers.Values.Count(v => v.HasValue);
+    private int TotalYes => answers.Values.Count(v => v == true);
+    private void Toggle(string text, bool value) => answers[text] = value;
+    private void ShowResults() => showResults = true;
+    private void Reset() { showResults = false; foreach (var k in new List<string>(answers.Keys)) answers[k] = null; }
+}
+
+@if (category == null)
+{
+    <h3>Categoría no encontrada</h3>
+    <p>Verifique el enlace.</p>
+}
+else
+{
+    <h2>@category.Title</h2>
+    <p class="text-muted">@category.Description</p>
+    <div class="alert alert-info">Marca cada comportamiento que reconoces como presente en ti (Sí) o ausente (No). Reflexiona sin juzgarte.</div>
+    <div class="alert alert-secondary py-2 small">
+        Nota: Todas las preguntas y ejemplos aplican a cualquier género.
+    </div>
+
+    <div>
+        <div class="list-group mb-3">
+            @foreach (var q in category.Questions)
+            {
+                var value = answers[q.Text];
+                <div class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="me-3">
+                            <div>@q.Text</div>
+                            @if (!string.IsNullOrWhiteSpace(q.Example))
+                            {
+                                <div class="small text-muted">@q.Example</div>
+                            }
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-sm @(value==true?"btn-danger":"btn-outline-danger")" @onclick="() => Toggle(q.Text, true)">Sí</button>
+                            <button type="button" class="btn btn-sm ms-1 @(value==false?"btn-success":"btn-outline-success")" @onclick="() => Toggle(q.Text, false)">No</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <button type="button" class="btn btn-primary" @onclick="ShowResults">Ver Resultados</button>
+        <button type="button" class="btn btn-secondary ms-2" @onclick="Reset">Reiniciar</button>
+    </div>
+
+    @if (showResults)
+    {
+        <div class="mt-4">
+            <h4>Resultados</h4>
+            <p>Preguntas marcadas como "Sí": @TotalYes de @answers.Count.</p>
+            <div class="list-group">
+                @foreach (var q in category.Questions)
+                {
+                    var a = answers[q.Text];
+                    var label = a == true ? "Sí" : (a == false ? "No" : "Sin responder");
+                    var badgeClass = a == true ? "bg-danger" : (a == false ? "bg-success" : "bg-secondary");
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <strong>@q.Text</strong>
+                                <div class="explanation-impact text-danger small d-flex align-items-start mt-1">
+                                    <span class="explanation-icon" aria-hidden="true">??</span>
+                                    <span><strong>Impacto en otros:</strong> @q.Explanation</span>
+                                </div>
+                                @if (!string.IsNullOrWhiteSpace(q.SelfImpact))
+                                {
+                                    <div class="small text-primary d-flex align-items-start mt-1">
+                                        <span aria-hidden="true">?</span>
+                                        <span class="ms-1"><strong>Impacto en ti:</strong> @q.SelfImpact</span>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(q.Example))
+                                {
+                                    <div class="small text-muted mt-1">@q.Example</div>
+                                }
+                            </div>
+                            <span class="badge @badgeClass align-self-start">Tu respuesta: @label</span>
+                        </div>
+                    </div>
+                }
+            </div>
+            <p class="mt-3">Para crecer en empatía, trabaja diariamente en las siguientes prácticas recomendadas:</p>
+            <ul>
+                @foreach (var p in category.DailyPractices)
+                {
+                    <li>@p</li>
+                }
+            </ul>
+            <div class="alert alert-warning">Este ejercicio no pretende etiquetarte, sino ayudarte a tomar conciencia y elegir acciones más empáticas.</div>
+        </div>
+    }
+}

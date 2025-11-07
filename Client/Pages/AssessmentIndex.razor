@@ -1,0 +1,22 @@
+@page "/assessment"
+@using BlazorApp.Shared.EmpathyAssessment
+
+<h2>Autoevaluación de Empatía</h2>
+<p>Selecciona una categoría para reflexionar sobre tus hábitos y descubrir prácticas diarias que fomentan la empatía.</p>
+<div class="alert alert-secondary py-2 small">
+    Nota: Todas las preguntas y ejemplos aplican a cualquier género.
+</div>
+<div class="row">
+    @foreach (var c in AssessmentData.Categories)
+    {
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@c.Title</h5>
+                    <p class="card-text small">@c.Description</p>
+                    <a class="btn btn-outline-primary btn-sm" href="assessment/@c.Id">Evaluar</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
