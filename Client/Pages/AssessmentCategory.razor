@@ -27,6 +27,8 @@
     private void Reset() { showResults = false; foreach (var k in new List<string>(answers.Keys)) answers[k] = null; }
 }
 
+<PageTitle>@(category?.Title ?? "Autoevaluación")</PageTitle>
+
 @if (category == null)
 {
     <h3>Categoría no encontrada</h3>
@@ -83,14 +85,14 @@ else
                             <div>
                                 <strong>@q.Text</strong>
                                 <div class="explanation-impact text-danger small d-flex align-items-start mt-1">
-                                    <span class="explanation-icon" aria-hidden="true">??</span>
+                                    <span class="me-1" aria-hidden="true">(!)</span>
                                     <span><strong>Impacto en otros:</strong> @q.Explanation</span>
                                 </div>
                                 @if (!string.IsNullOrWhiteSpace(q.SelfImpact))
                                 {
                                     <div class="small text-primary d-flex align-items-start mt-1">
-                                        <span aria-hidden="true">?</span>
-                                        <span class="ms-1"><strong>Impacto en ti:</strong> @q.SelfImpact</span>
+                                        <span class="me-1" aria-hidden="true">(~)</span>
+                                        <span><strong>Impacto en ti:</strong> @q.SelfImpact</span>
                                     </div>
                                 }
                                 @if (!string.IsNullOrWhiteSpace(q.Example))
