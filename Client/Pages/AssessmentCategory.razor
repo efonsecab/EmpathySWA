@@ -27,20 +27,20 @@
     private void Reset() { showResults = false; foreach (var k in new List<string>(answers.Keys)) answers[k] = null; }
 }
 
-<PageTitle>@(category?.Title ?? "AutoevaluaciÛn")</PageTitle>
+<PageTitle>@(category?.Title ?? "Autoevaluaci√≥n")</PageTitle>
 
 @if (category == null)
 {
-    <h3>CategorÌa no encontrada</h3>
+    <h3>Categor√≠a no encontrada</h3>
     <p>Verifique el enlace.</p>
 }
 else
 {
     <h2>@category.Title</h2>
     <p class="text-muted">@category.Description</p>
-    <div class="alert alert-info">Marca cada comportamiento que reconoces como presente en ti (SÌ) o ausente (No). Reflexiona sin juzgarte.</div>
+    <div class="alert alert-info">Marca cada comportamiento que reconoces como presente en ti (S√≠) o ausente (No). Reflexiona sin juzgarte.</div>
     <div class="alert alert-secondary py-2 small">
-        Nota: Todas las preguntas y ejemplos aplican a cualquier gÈnero.
+        Nota: Todas las preguntas y ejemplos aplican a cualquier g√©nero.
     </div>
 
     <div>
@@ -58,7 +58,7 @@ else
                             }
                         </div>
                         <div>
-                            <button type="button" class="btn btn-sm @(value==true?"btn-danger":"btn-outline-danger")" @onclick="() => Toggle(q.Text, true)">SÌ</button>
+                            <button type="button" class="btn btn-sm @(value==true?"btn-danger":"btn-outline-danger")" @onclick="() => Toggle(q.Text, true)">S√≠</button>
                             <button type="button" class="btn btn-sm ms-1 @(value==false?"btn-success":"btn-outline-success")" @onclick="() => Toggle(q.Text, false)">No</button>
                         </div>
                     </div>
@@ -73,12 +73,12 @@ else
     {
         <div class="mt-4">
             <h4>Resultados</h4>
-            <p>Preguntas marcadas como "SÌ": @TotalYes de @answers.Count.</p>
+            <p>Preguntas marcadas como "S√≠": @TotalYes de @answers.Count.</p>
             <div class="list-group">
                 @foreach (var q in category.Questions)
                 {
                     var a = answers[q.Text];
-                    var label = a == true ? "SÌ" : (a == false ? "No" : "Sin responder");
+                    var label = a == true ? "S√≠" : (a == false ? "No" : "Sin responder");
                     var badgeClass = a == true ? "bg-danger" : (a == false ? "bg-success" : "bg-secondary");
                     <div class="list-group-item">
                         <div class="d-flex justify-content-between">
@@ -105,14 +105,14 @@ else
                     </div>
                 }
             </div>
-            <p class="mt-3">Para crecer en empatÌa, trabaja diariamente en las siguientes pr·cticas recomendadas:</p>
+            <p class="mt-3">Para crecer en empat√≠a, trabaja diariamente en las siguientes pr√°cticas recomendadas:</p>
             <ul>
                 @foreach (var p in category.DailyPractices)
                 {
                     <li>@p</li>
                 }
             </ul>
-            <div class="alert alert-warning">Este ejercicio no pretende etiquetarte, sino ayudarte a tomar conciencia y elegir acciones m·s emp·ticas.</div>
+            <div class="alert alert-warning">Este ejercicio no pretende etiquetarte, sino ayudarte a tomar conciencia y elegir acciones m√°s emp√°ticas.</div>
         </div>
     }
 }
