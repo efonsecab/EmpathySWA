@@ -365,6 +365,29 @@ namespace BlazorApp.Shared.EmpathyAssessment
                     "Planear una micro-cita (20–30 min) semanal.",
                 }
             },
+            new EmpathyCategory
+            {
+                Id = "apertura-social",
+                Title = "Apertura Social",
+                Description = "Patrones de cierre relacional: negarse a conocer nuevas personas, quedarse en círculos cerrados y no mostrar interés mínimo por otro.",
+                Questions = new List<EmpathyQuestion>
+                {
+                    new EmpathyQuestion { Text = "¿Rechazas sistemáticamente conocer gente nueva en entornos seguros?", Explanation = "Envía el mensaje de que otras personas no valen tu tiempo y reduce diversidad de apoyo e ideas.", Example = "Ej: En reuniones, te presentas solo a conocidos y evitas cualquier saludo nuevo.", SelfImpact = "Empobrece tu red y resiliencia: menos perspectivas, menos ayuda disponible.", BibleReference = "Romanos 12:10" },
+                    new EmpathyQuestion { Text = "¿Declinas invitaciones sociales siempre con respuestas mínimas y sin alternativa?", Explanation = "Comunica desinterés sostenido y erosiona pertenencia; también te autoexcluye de experiencias nutritivas.", Example = "Ej: Responder 'no puedo' a todas las salidas de mes sin sugerir otra fecha.", SelfImpact = "Tu círculo se reduce; pierdes visibilidad, apoyo emocional y oportunidades.", BibleReference = "Lucas 6:31" },
+                    new EmpathyQuestion { Text = "¿Nunca haces una pregunta genuina sobre la vida de la nueva persona?", Explanation = "Niega validación básica y frena inicio de confianza desde el primer contacto.", Example = "Ej: Limitarte a responder monosílabos sin preguntar nada.", SelfImpact = "Te perciben distante; disminuye probabilidad de nuevas amistades o colaboraciones.", BibleReference = "Filipenses 2:3-4" },
+                    new EmpathyQuestion { Text = "¿Permanece tu grupo como 'burbuja' cerrada ignorando a quienes están en la periferia?", Explanation = "Normaliza exclusión y priva a otros de integración; refuerza cámaras de eco.", Example = "Ej: En actividades grupales, solo conversas con tu círculo íntimo sin abrir espacio.", SelfImpact = "Pierdes diversidad y aprendizaje; tu pensamiento y empatía se estancan.", BibleReference = "Gálatas 6:2" },
+                    new EmpathyQuestion { Text = "¿Evitas sonreír o saludar primero cuando alguien nuevo se aproxima?", Explanation = "Desincentiva conexión y puede hacer sentir indignidad o rechazo.", Example = "Ej: Ver a alguien acercarse y apartar la mirada sin saludar.", SelfImpact = "Reduces conexiones potenciales y apoyo social en momentos futuros.", BibleReference = "Juan 13:34-35" },
+                    new EmpathyQuestion { Text = "¿Ignoras intencionalmente a alguien que intenta integrarse al grupo?", Explanation = "Produce dolor social agudo y dificulta su participación.", Example = "Ej: No responder su presentación o preguntas iniciales.", SelfImpact = "Erosiona tu reputación de cuidado; cierras puertas a colaboraciones.", BibleReference = "Mateo 22:37-39" },
+                },
+                DailyPractices = new List<string>
+                {
+                    "Saludar por nombre a una persona nueva cada semana.",
+                    "Formular 2 preguntas genuinas a alguien que casi no conoces.",
+                    "Invitar a un nuevo integrante a participar en la conversación.",
+                    "Agradecer una interacción corta aunque sea casual.",
+                    "Rotar asiento/posición para ampliar tu círculo de contacto.",
+                }
+            },
         };
 
         /// <summary>
