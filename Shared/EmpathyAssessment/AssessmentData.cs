@@ -3,8 +3,15 @@ using System.Linq;
 
 namespace BlazorApp.Shared.EmpathyAssessment
 {
+    /// <summary>
+    /// Repositorio en memoria con los datos estáticos de la evaluación de empatía.
+    /// Expone las categorías, preguntas y prácticas diarias disponibles en la aplicación.
+    /// </summary>
     public static class AssessmentData
     {
+        /// <summary>
+        /// Conjunto inmutable de categorías de evaluación de empatía disponibles para navegación y consulta.
+        /// </summary>
         public static readonly IReadOnlyList<EmpathyCategory> Categories = new List<EmpathyCategory>
         {
             new EmpathyCategory
@@ -363,7 +370,7 @@ namespace BlazorApp.Shared.EmpathyAssessment
                     new EmpathyQuestion { Text = "¿Etiquetas a personas con 'energía masculina/femenina' para validar o invalidar comportamientos?", Explanation = "Encasilla y prescribe roles rígidos que inhiben la expresión genuina.", Example = "Ej: 'Deberías cultivar tu \"energía femenina\" y dejar de ser tan racional'.", SelfImpact = "Te limita en tu propia expresión; te aísla de vínculos flexibles y sanos." },
                     new EmpathyQuestion { Text = "¿Das cumplidos centrados sólo en atributos físicos cuando la persona comparte logros?", Explanation = "Desvía reconocimiento del esfuerzo y refuerza evaluación superficial.", Example = "Ej: Tras hablar de un proyecto: 'Lo importante es que te ves muy bien haciéndolo'.", SelfImpact = "Te desconecta del mérito real; empobrece tu criterio y tus relaciones." },
                     new EmpathyQuestion { Text = "¿Supones fragilidad y tomas decisiones por alguien sin preguntar?", Explanation = "Quita agencia y consolida dependencia, anulando su voz.", Example = "Ej: Contestar por la persona en una reunión: 'No puede con eso ahora'.", SelfImpact = "Te sobrecargas y controlas en exceso; reduces la colaboración contigo." },
-                    new EmpathyQuestion { Text = "¿Usas humor para normalizar estereotipos ('broma inofensiva')?", Explanation = "Las 'bromas' sostienen sesgos y legitiman microagresiones repetidas.", Example = "Ej: 'Es chiste, todos los de X son tacaños'.", SelfImpact = "Te asocian a prejuicios; pierdes reputación y vínculos de calidad." },
+                    new EmpathyQuestion { Text = "¿Usas humor para normalizar estereotipos ('broma inofensiva')?", Explanation = "Las 'bromas' sostienen sesgos y legitiman microagresiones repetidas.", Example = "Ej: 'Es chiste, todos los de X son tacaños'.", SelfImpact = "Te asocian con prejuicios; pierdes reputación y vínculos de calidad." },
                     new EmpathyQuestion { Text = "¿Elogias la 'asimilación' a tu cultura o estilo como superior?", Explanation = "Impone una norma dominante y desvaloriza el origen o identidad propia.", Example = "Ej: 'Ya hablas casi como nosotros, así te aceptarás más'.", SelfImpact = "Limita tu mundo; reduces tu capacidad de aprender de la diversidad." },
                     new EmpathyQuestion { Text = "¿Utilizas espiritualidad o desarrollo personal para invalidar emociones ('solo vibra alto')?", Explanation = "Silencia procesos legítimos de dolor y responsabiliza a la víctima de su malestar.", Example = "Ej: 'No estés triste, eleva tu frecuencia y ya'.", SelfImpact = "Te desconecta de tu propia humanidad; bloquea tu crecimiento emocional." },
                 },
@@ -379,6 +386,15 @@ namespace BlazorApp.Shared.EmpathyAssessment
             },
         };
 
+        /// <summary>
+        /// Obtiene una categoría por su identificador legible para URL.
+        /// La comparación es ordinal sin distinción de mayúsculas/minúsculas.
+        /// </summary>
+        /// <param name="id">Identificador (slug) de la categoría a buscar. Puede ser nulo.</param>
+        /// <returns>
+        /// La instancia de <see cref="EmpathyCategory"/> correspondiente al identificador
+        /// proporcionado, o <c>null</c> si no se encuentra.
+        /// </returns>
         public static EmpathyCategory GetById(string id)
         {
             return Categories.FirstOrDefault(c => string.Equals(c.Id, id, System.StringComparison.OrdinalIgnoreCase));

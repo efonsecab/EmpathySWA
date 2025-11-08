@@ -49,6 +49,7 @@ This is an **Empathy Assessment Application** built with Blazor WebAssembly and 
   - Follow standard C# naming conventions (PascalCase for public members, camelCase for private fields)
   - Enable nullable reference types (`<Nullable>enable</Nullable>`)
   - Use implicit usings where enabled
+  - TODOS LOS MODELOS Y CLASES, ASÍ COMO TODAS LAS PROPIEDADES Y MÉTODOS PÚBLICOS, DEBEN INCLUIR COMENTARIOS XML. Cada clase/modelo debe tener un `<summary>` que describa claramente su propósito (en español si es visible para el dominio). Cada método público debe incluir: `<summary>`, una etiqueta `<param>` por cada parámetro, `<returns>` cuando no sea `void`, y una etiqueta `<exception cref="TipoDeExcepcion">` por cada excepción que pueda lanzar de forma razonablemente previsible (por ejemplo validaciones, acceso a datos, argumentos nulos, etc.). Mantener la descripción consistente con el dominio de la empatía. Si el contenido es de cara al usuario final, la documentación debe estar en español.
 
 - **Razor components:**
   - Component code should be in `@code` blocks
@@ -104,6 +105,7 @@ When contributing to this repository:
 4. Ensure nullable reference types are properly handled in new code
 5. Add meaningful comments in Spanish for Spanish-language features
 6. Consider the empathy assessment domain context when designing features
+7. Documentar TODO miembro público con comentarios XML conforme a la sección de estilo (incluyendo excepciones lanzadas por los métodos).
 
 ## Dependencies Management
 
