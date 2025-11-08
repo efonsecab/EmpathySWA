@@ -3,39 +3,39 @@ using System.Collections.Generic;
 namespace BlazorApp.Shared.EmpathyAssessment
 {
     /// <summary>
-    /// Representa una categorÌa tem·tica de la evaluaciÛn de empatÌa, que agrupa
-    /// preguntas sobre un conjunto coherente de comportamientos y pr·cticas diarias
+    /// Representa una categor√≠a tem√°tica de la evaluaci√≥n de empat√≠a, que agrupa
+    /// preguntas sobre un conjunto coherente de comportamientos y pr√°cticas diarias
     /// sugeridas para mejorar.
     /// </summary>
     public class EmpathyCategory
     {
         /// <summary>
-        /// Identificador corto (slug) ˙nico usado para ruteo y b˙squeda.
+        /// Identificador corto (slug) √∫nico usado para ruteo y b√∫squeda.
         /// </summary>
         public string Id { get; set; } // slug for routing
 
         /// <summary>
-        /// TÌtulo visible de la categorÌa mostrado en la interfaz.
+        /// T√≠tulo visible de la categor√≠a mostrado en la interfaz.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// DescripciÛn breve que contextualiza el foco de la categorÌa.
+        /// Descripci√≥n breve que contextualiza el foco de la categor√≠a.
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// ColecciÛn de preguntas diagnÛsticas asociadas a la categorÌa.
+        /// Colecci√≥n de preguntas diagn√≥sticas asociadas a la categor√≠a.
         /// </summary>
         public List<EmpathyQuestion> Questions { get; set; }
 
         /// <summary>
-        /// Lista de pr·cticas diarias sugeridas (acciones concretas) para reforzar h·bitos emp·ticos.
+        /// Lista de pr√°cticas diarias sugeridas (acciones concretas) para reforzar h√°bitos emp√°ticos.
         /// </summary>
         public List<string> DailyPractices { get; set; }
 
         /// <summary>
-        /// Inicializa una nueva instancia de la categorÌa con colecciones y cadenas vacÌas
+        /// Inicializa una nueva instancia de la categor√≠a con colecciones y cadenas vac√≠as
         /// para evitar referencias nulas en consumo de componentes Blazor.
         /// </summary>
         public EmpathyCategory()
@@ -49,8 +49,8 @@ namespace BlazorApp.Shared.EmpathyAssessment
     }
 
     /// <summary>
-    /// Pregunta especÌfica utilizada para autoevaluar un comportamiento que puede afectar
-    /// la empatÌa, incluyendo explicaciÛn del impacto y ejemplo concreto.
+    /// Pregunta espec√≠fica utilizada para autoevaluar un comportamiento que puede afectar
+    /// la empat√≠a, incluyendo explicaci√≥n del impacto y ejemplo concreto.
     /// </summary>
     public class EmpathyQuestion
     {
@@ -60,7 +60,7 @@ namespace BlazorApp.Shared.EmpathyAssessment
         public string Text { get; set; }
 
         /// <summary>
-        /// ExplicaciÛn del impacto emocional o relacional cuando el comportamiento ocurre.
+        /// Explicaci√≥n del impacto emocional o relacional cuando el comportamiento ocurre.
         /// </summary>
         public string Explanation { get; set; } // Impacto emocional en otros cuando este comportamiento ocurre
 
@@ -70,12 +70,12 @@ namespace BlazorApp.Shared.EmpathyAssessment
         public string Example { get; set; } // Ejemplo concreto que ilustra la conducta
 
         /// <summary>
-        /// Impacto personal (cÛmo afecta a quien lo practica) si el patrÛn se mantiene.
+        /// Impacto personal (c√≥mo afecta a quien lo practica) si el patr√≥n se mantiene.
         /// </summary>
-        public string SelfImpact { get; set; } // Impacto personal especÌfico cuando se mantiene este patrÛn
+        public string SelfImpact { get; set; } // Impacto personal espec√≠fico cuando se mantiene este patr√≥n
 
         /// <summary>
-        /// Inicializa una nueva pregunta con valores de texto vacÌos para evitar nulos.
+        /// Inicializa una nueva pregunta con valores de texto vac√≠os para evitar nulos.
         /// </summary>
         public EmpathyQuestion()
         {
