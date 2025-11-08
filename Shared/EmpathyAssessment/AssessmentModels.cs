@@ -75,6 +75,12 @@ namespace BlazorApp.Shared.EmpathyAssessment
         public string SelfImpact { get; set; } // Impacto personal específico cuando se mantiene este patrón
 
         /// <summary>
+        /// Referencia bíblica asociada que invita a la reflexión empática (solo referencia, sin texto con copyright).
+        /// Ej.: "Filipenses 2:3-4" o "Juan 13:34-35".
+        /// </summary>
+        public string? BibleReference { get; set; }
+
+        /// <summary>
         /// Inicializa una nueva pregunta con valores de texto vacíos para evitar nulos.
         /// </summary>
         public EmpathyQuestion()
@@ -83,6 +89,7 @@ namespace BlazorApp.Shared.EmpathyAssessment
             Explanation = string.Empty;
             Example = string.Empty;
             SelfImpact = string.Empty;
+            BibleReference = null;
         }
     }
 }

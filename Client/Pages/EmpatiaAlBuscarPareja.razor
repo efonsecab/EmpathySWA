@@ -2,6 +2,7 @@
 @layout BlazorApp.Client.Layout.MainLayout
 
 @inject IJSRuntime JS
+@using BlazorApp.Shared.EmpathyAssessment
 
 <PageTitle>Empatía al buscar pareja</PageTitle>
 
@@ -30,6 +31,33 @@
     <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(indicadoresRef))">Indicadores de progreso</button></li>
 </ol>
 
+@functions {
+    private RenderFragment VerseBlock(string reference, string tag) => builder =>
+    {
+        var verse = BibleVerseProvider.GetByReference(reference);
+        if (verse is null)
+        {
+            verse = BibleVerseProvider.GetRandom(tag); // fallback
+        }
+        var highlightClass = verse.HighlightLoveNeighbor ? "bg-warning text-dark" : "bg-light text-muted";
+        int seq = 0;
+        builder.OpenElement(seq++, "div");
+        builder.AddAttribute(seq++, "class", "small verse-block mt-2 p-2 border rounded");
+        builder.OpenElement(seq++, "div");
+        builder.AddContent(seq++, (MarkupString)$"<span class='badge {highlightClass}'>Versículo</span> <strong>{verse.Reference}</strong> <span class='text-muted'>({verse.Version})</span>");
+        builder.CloseElement();
+        builder.OpenElement(seq++, "div");
+        builder.AddAttribute(seq++, "class", "mt-1");
+        builder.AddContent(seq++, verse.Text);
+        builder.CloseElement();
+        builder.OpenElement(seq++, "div");
+        builder.AddAttribute(seq++, "class", "text-muted small");
+        builder.AddContent(seq++, verse.Summary);
+        builder.CloseElement();
+        builder.CloseElement();
+    };
+}
+
 <h2 id="autoempatia" @ref="autoempatiaRef">1. Autoempatía profunda</h2>
 <p class="small">Comprenderte evita proyectar heridas sobre otros. Empatía contigo es reconocer tu historia sin auto‑acusación.</p>
 <ul class="small">
@@ -38,6 +66,7 @@
     <li>Registra semanalmente emociones intensas: situación, sensación corporal, pensamiento automático, respuesta alternativa.</li>
     <li>Práctica de cuidado: sueño suficiente, ejercicio 3×/sem, pausa de silencio, naturaleza.</li>
 </ul>
+@VerseBlock("Filipenses 2:3-4", "humildad")
 
 <h2 id="amistades" @ref="amistadesRef">2. Empatía con amistades y potenciales parejas</h2>
 <ul class="small">
@@ -46,6 +75,7 @@
     <li>Beneficio de la duda ante primeras impresiones y divergencias culturales.</li>
     <li>Evita idealizar tras momentos de vulnerabilidad (distinguir empatía de enamoramiento).</li>
 </ul>
+@VerseBlock("Romanos 12:10", "fraternidad")
 
 <h2 id="principios" @ref="principiosRef">3. Principios y valores con empatía</h2>
 <p class="small">Firmeza empática no impone; comunica límites desde respeto y propósito compartido.</p>
@@ -54,6 +84,7 @@
     <li>Revisión trimestral: ¿siguen alineados a tu crecimiento y servicio?</li>
     <li>Evita “yugo desigual” también en madurez emocional/espiritual: acompañar ≠ salvar.</li>
 </ul>
+@VerseBlock("Mateo 22:37-39", "amor")
 
 <h2 id="espera-activa" @ref="esperaActivaRef">4. Esperar activo vs esperar pasivo</h2>
 <ul class="small">
@@ -61,6 +92,7 @@
     <li>Activo: formación, comunidad, servicio, ampliación de círculos, sanidad personal.</li>
     <li>Acción mensual: 2 actividades nuevas (voluntariado, estudio bíblico, deporte grupal).</li>
 </ul>
+@VerseBlock("Gálatas 5:13-14", "acciones")
 
 <h2 id="fechas-limite" @ref="fechasLimiteRef">5. Fechas límite empáticas</h2>
 <ul class="small">
@@ -68,6 +100,7 @@
     <li>Ejemplo: “Exploro amistad + posibilidad romántica hasta 3‑4 meses; si no hay intención clara, cierro esa vía con respeto”.</li>
     <li>Fe + acción: orar, discernir, actuar responsablemente (Ecl 11:4).</li>
 </ul>
+@VerseBlock("Lucas 6:31", "amor")
 
 <h2 id="orgullo" @ref="orgulloRef">6. Transformar orgullo en humildad empática</h2>
 <ul class="small">
@@ -75,6 +108,7 @@
     <li>Pregúntate: “¿Estoy pidiendo algo que no practico?”</li>
     <li>Orgullo genera distancia; humildad abre aprendizaje mutuo.</li>
 </ul>
+@VerseBlock("Filipenses 2:3-4", "humildad")
 
 <h2 id="sanidad-perdon" @ref="sanidadPerdonRef">7. Sanidad emocional y perdón de corazón</h2>
 <ul class="small">
@@ -82,6 +116,7 @@
     <li>Proceso empático: reconocer dolor, dialogar, comprender sin excusar, decidir soltar, acordar prevención.</li>
     <li>Checklist de revisión: ¿puedo narrar el evento con calma? ¿Hay apertura a nuevas experiencias?</li>
 </ul>
+@VerseBlock("1 Juan 4:7-11", "amor")
 
 <h2 id="circulos-sociales" @ref="circulosSocialesRef">8. Círculos sociales y expansión respetuosa</h2>
 <ul class="small">
@@ -89,6 +124,7 @@
     <li>Lista de lugares: iglesia, estudios, ayuda social, club lectura, feria agricultor, gimnasio, senderismo, teatro.</li>
     <li>Acción semanal: conocer 2 personas nuevas con 3 preguntas genuinas.</li>
 </ul>
+@VerseBlock("Lucas 6:31", "reciprocidad")
 
 <h2 id="comunicacion" @ref="comunicacionRef">9. Comunicación empática vs crítica/queja</h2>
 <ul class="small">
@@ -96,6 +132,7 @@
     <li>Formato: Hecho + Emoción + Necesidad + Petición (“Cuando no respondes horas, me siento inquieto; necesito conexión; ¿podemos acordar ventana de respuesta?”).</li>
     <li>Escucha reflejante: “Lo que entiendo es…” + validar + preguntar ajuste.</li>
 </ul>
+@VerseBlock("Efesios 4:2", "amor")
 
 <h2 id="intensidad" @ref="intensidadRef">10. Intensidad, límites y espacio</h2>
 <ul class="small">
@@ -103,6 +140,7 @@
     <li>Señales de intensidad no regulada: ansiedad si no responde rápido, invasión de tiempo laboral, celos sin evidencia.</li>
     <li>Estrategia: acordar ventanas de comunicación, pausas conscientes ante activación emocional.</li>
 </ul>
+@VerseBlock("1 Corintios 13:4-7", "paciencia")
 
 <h2 id="apariencia" @ref="aparienciaRef">11. Apariencia física y dignidad permanente</h2>
 <ul class="small">
@@ -110,6 +148,7 @@
     <li>Pregunta empática: “¿Cómo puedo apoyar tu bienestar físico sin presionarte?”</li>
     <li>Prepararte para cambios (enfermedad, embarazo, envejecimiento) fortalece amor decidido.</li>
 </ul>
+@VerseBlock("1 Corintios 13:4-7", "amor")
 
 <h2 id="proyecto-vida" @ref="proyectoVidaRef">12. Proyecto de vida y compatibilidad empática</h2>
 <ul class="small">
@@ -117,6 +156,7 @@
     <li>Metas 3 niveles: corto (hábitos), medio (formación/servicio), largo (familia/propósito).</li>
     <li>Conversación clave: “¿Qué sacrificios estás dispuesto(a) a hacer por familia y relación?”</li>
 </ul>
+@VerseBlock("Gálatas 6:2", "servicio")
 
 <h2 id="apego-pas" @ref="apegoPasRef">13. Estilos de apego y alta sensibilidad (PAS)</h2>
 <ul class="small">
@@ -125,6 +165,7 @@
     <li>Desorganizado: busca apoyo profesional + estructura de seguridad comunicada.</li>
     <li>PAS: proteger de sobrecarga sensorial y emocional (pausas, naturaleza, reducción de multitarea social).</li>
 </ul>
+@VerseBlock("Gálatas 6:2", "cargas")
 
 <h2 id="manipulacion" @ref="manipulacionRef">14. Evitar manipulación y “tests”</h2>
 <ul class="small">
@@ -132,6 +173,7 @@
     <li>Indicadores de ambiente sano: claridad de intención, ausencia de juegos de poder, ajustes negociados.</li>
     <li>Pregunta empática: “¿Qué necesitarías para sentir confianza aquí sin probarme?”</li>
 </ul>
+@VerseBlock("Romanos 12:10", "amor")
 
 <h2 id="acciones" @ref="accionesRef">15. Plan de acciones empáticas</h2>
 <ul class="small">
@@ -140,6 +182,7 @@
     <li>Mensual: ajuste de metas, evaluación de círculos sociales, registro de avances en sanidad y perdón.</li>
     <li>Trimestral: revisión no negociables y proyecto de vida; descarte de expectativas irreales detectadas.</li>
 </ul>
+@VerseBlock("1 Juan 3:16-18", "acciones")
 
 <h2 id="indicadores" @ref="indicadoresRef">16. Indicadores de progreso</h2>
 <ul class="small">
@@ -149,6 +192,7 @@
     <li>Coherencia entre lo que solicitas y aportas (reciprocidad visible).</li>
     <li>Decisiones oportunas de soltar relaciones estancadas sin resentimiento.</li>
 </ul>
+@VerseBlock("1 Juan 3:16-18", "amor")
 
 <p class="small text-muted mt-4">Empatía guía tu búsqueda: dignidad, honestidad, límites y acción.</p>
 

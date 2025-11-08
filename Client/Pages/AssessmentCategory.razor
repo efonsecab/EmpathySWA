@@ -32,6 +32,35 @@
     private void Toggle(string text, bool value) => answers[text] = value;
     private void ShowResults() => showResults = true;
     private void Reset() { showResults = false; foreach (var k in new List<string>(answers.Keys)) answers[k] = null; }
+
+    private string GetVerseForQuestion(EmpathyQuestion q, string? categoryId)
+    {
+        if (!string.IsNullOrWhiteSpace(q.BibleReference)) return q.BibleReference!;
+        // Fallback por categoría para asegurar que cada pregunta muestre una referencia
+        return categoryId?.ToLowerInvariant() switch
+        {
+            "comunicacion-verbal" => "Efesios 4:29",
+            "comunicacion-no-verbal" => "Colosenses 3:12-14",
+            "escucha" => "Santiago 1:19",
+            "comunicacion-digital" => "Colosenses 4:6",
+            "noviazgo" => "Juan 13:34-35",
+            "comportamiento-en-conflicto" => "Romanos 12:18",
+            "egocentrismo-y-falta-de-consideracion" => "Filipenses 2:3-4",
+            "comportamiento-social-y-grupal" => "Romanos 12:10",
+            "relacion-con-entorno-y-servicios" => "Lucas 6:31",
+            "amistad" => "Proverbios 17:17",
+            "matrimonio" => "Efesios 5:25",
+            "amar-responsablemente" => "Gálatas 5:13-14",
+            _ => "Filipenses 2:3-4",
+        };
+    }
+
+    private bool IsLoveNeighborHighlight(string? reference)
+    {
+        if (string.IsNullOrWhiteSpace(reference)) return false;
+        var v = BibleVerseProvider.GetByReference(reference);
+        return v?.HighlightLoveNeighbor == true;
+    }
 }
 
 <PageTitle>@(category?.Title ?? "Autoevaluación")</PageTitle>
@@ -48,7 +77,7 @@ else
     <div class="alert alert-info">Marca cada comportamiento que reconoces como presente en ti (Sí) o ausente (No). Reflexiona sin juzgarte.</div>
     <div class="alert alert-secondary py-2 small">
         Nota: Todas las preguntas y ejemplos aplican a cualquier género. Para guía práctica adicional revisa: 
-        <NavLink href="/amar-responsablemente">Amar responsablemente</NavLink>, 
+        <NavLink href="/amar-responsavelmente">Amar responsablemente</NavLink>, 
         <NavLink href="/perdon-autentico">Perdón auténtico</NavLink>.
     </div>
 
@@ -89,6 +118,9 @@ else
                     var a = answers[q.Text];
                     var label = a == true ? "Sí" : (a == false ? "No" : "Sin responder");
                     var badgeClass = a == true ? "bg-danger" : (a == false ? "bg-success" : "bg-secondary");
+                    var verseRef = GetVerseForQuestion(q, category.Id);
+                    var verseHighlight = IsLoveNeighborHighlight(verseRef);
+                    var verse = BibleVerseProvider.GetByReference(verseRef);
                     <div class="list-group-item">
                         <div class="d-flex justify-content-between">
                             <div>
@@ -107,6 +139,15 @@ else
                                 @if (!string.IsNullOrWhiteSpace(q.Example))
                                 {
                                     <div class="small text-muted mt-1">@q.Example</div>
+                                }
+                                @if (verse is not null)
+                                {
+                                    <div class="small mt-2">
+                                        <span class="badge @(verseHighlight ? "bg-warning text-dark" : "bg-light text-muted")">Versículo</span>
+                                        <span class="ms-2"><strong>@verse.Reference</strong> <span class="text-muted">(@verse.Version)</span></span>
+                                        <div class="mt-1">@verse.Text</div>
+                                        <div class="text-muted">@verse.Summary</div>
+                                    </div>
                                 }
                             </div>
                             <span class="badge @badgeClass align-self-start">Tu respuesta: @label</span>

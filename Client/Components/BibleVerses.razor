@@ -1,0 +1,31 @@
+@using BlazorApp.Shared.EmpathyAssessment
+
+<div class="list-group">
+    @foreach (var v in verses)
+    {
+        var badgeClass = v.HighlightLoveNeighbor ? "badge bg-warning text-dark" : "badge bg-secondary";
+        <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-start">
+                <div class="me-3">
+                    <div><strong>@v.Reference</strong> <span class="text-muted small">(@v.Version)</span></div>
+                    <div class="small">@v.Text</div>
+                    <div class="small text-muted">@v.Summary</div>
+                </div>
+                <span class="@badgeClass">@((v.HighlightLoveNeighbor ? "Amar al prójimo" : "Empatía"))</span>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    private IReadOnlyList<BibleVerse> verses = Array.Empty<BibleVerse>();
+
+    [Parameter] public string Tag { get; set; } = string.Empty;
+    [Parameter] public bool HighlightOnly { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        var all = BibleVerseProvider.GetByTag(Tag);
+        verses = HighlightOnly ? all.Where(v => v.HighlightLoveNeighbor).ToList() : all;
+    }
+}

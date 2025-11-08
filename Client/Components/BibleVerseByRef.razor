@@ -1,0 +1,32 @@
+@using BlazorApp.Shared.EmpathyAssessment
+
+@code {
+    [Parameter] public string Reference { get; set; } = string.Empty;
+    [Parameter] public string FallbackTag { get; set; } = string.Empty;
+
+    private RenderFragment Content => builder =>
+    {
+        var verse = BibleVerseProvider.GetByReference(Reference);
+        if (verse is null)
+        {
+            verse = BibleVerseProvider.GetRandom(FallbackTag);
+        }
+        var badgeClass = verse.HighlightLoveNeighbor ? "badge bg-warning text-dark" : "badge bg-light text-muted";
+        int seq = 0;
+        builder.OpenElement(seq++, "div");
+        builder.AddAttribute(seq++, "class", "alert alert-light border small");
+        builder.OpenElement(seq++, "div");
+        builder.AddMarkupContent(seq++, $"<span class='badge {badgeClass}'>Versículo</span> <strong>{verse.Reference}</strong> <span class='text-muted'>({verse.Version})</span>");
+        builder.CloseElement();
+        builder.OpenElement(seq++, "div");
+        builder.AddContent(seq++, verse.Text);
+        builder.CloseElement();
+        builder.OpenElement(seq++, "div");
+        builder.AddAttribute(seq++, "class", "text-muted");
+        builder.AddContent(seq++, verse.Summary);
+        builder.CloseElement();
+        builder.CloseElement();
+    };
+}
+
+@Content
