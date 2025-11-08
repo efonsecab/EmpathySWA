@@ -23,7 +23,7 @@
         "Ayuda a colocar o mover una silla sin que lo pidan.",
         "Haz silencio atento mientras la otra persona termina su idea.",
         "Ofrece acercar un objeto que está lejos de su alcance.",
-        "Da un cumplido sobre perseverancia, no apariencia.",
+        "Da un cumplido sobre perseverancia, noAppearance.",
         "Pregunta: '¿Necesitas un descanso?' y respeta la respuesta.",
         "Felícita un avance pequeño que la persona minimiza.",
         "Ofrece tu lugar en la fila si ves prisa o dificultad.",
@@ -391,7 +391,7 @@
     private int todayIndex;
     private int todayNumber;
     private ElementReference todayElement;
-    [Inject] private IJSRuntime JS { get; set; }
+    [Inject] private IJSRuntime JS { get; set; } = default!;
 
     protected override void OnInitialized()
     {

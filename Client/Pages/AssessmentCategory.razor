@@ -3,14 +3,21 @@
 @inject NavigationManager Nav
 
 @code {
-    [Parameter] public string CategoryId { get; set; }
-    private EmpathyCategory category;
+    [Parameter] public string? CategoryId { get; set; }
+    private EmpathyCategory? category;
     private Dictionary<string, bool?> answers = new Dictionary<string, bool?>();
     private bool showResults;
 
     protected override void OnParametersSet()
     {
-        category = CategoryId == null ? null : AssessmentData.GetById(CategoryId);
+        if (string.IsNullOrEmpty(CategoryId))
+        {
+            category = null;
+        }
+        else
+        {
+            category = AssessmentData.GetById(CategoryId);
+        }
         if (category != null && answers.Count == 0)
         {
             foreach (var q in category.Questions)
