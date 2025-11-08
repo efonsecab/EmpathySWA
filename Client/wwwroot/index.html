@@ -27,13 +27,12 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script src="js/scroll.js"></script>
     <script>
-        window.scrollHelpers = {
+        window.scrollHelpers = window.scrollHelpers || {
             scrollIntoViewElement: function (el) {
                 if (!el) return;
-                try {
-                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                } catch { /* no-op */ }
+                try { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch { }
             }
         };
     </script>

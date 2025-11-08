@@ -1,0 +1,177 @@
+@page "/empatia-al-buscar-pareja"
+@layout BlazorApp.Client.Layout.MainLayout
+
+@inject IJSRuntime JS
+
+<PageTitle>Empatía al buscar pareja</PageTitle>
+
+<h1>Empatía al buscar pareja</h1>
+<p>
+    Guía enfocada en empatía contigo, amistades y potenciales parejas. Navegación interna sin uso de hashes.
+</p>
+
+<h2>Índice rápido (clic desplaza)</h2>
+<ol class="small">
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(autoempatiaRef))">Autoempatía profunda</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(amistadesRef))">Empatía con amistades y potenciales parejas</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(principiosRef))">Principios y valores con empatía</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(esperaActivaRef))">Esperar activo vs esperar pasivo</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(fechasLimiteRef))">Fechas límite empáticas</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(orgulloRef))">Transformar orgullo en humildad empática</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(sanidadPerdonRef))">Sanidad emocional y perdón de corazón</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(circulosSocialesRef))">Círculos sociales y expansión respetuosa</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(comunicacionRef))">Comunicación empática vs crítica/queja</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(intensidadRef))">Intensidad, límites y espacio</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(aparienciaRef))">Apariencia física y dignidad permanente</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(proyectoVidaRef))">Proyecto de vida y compatibilidad empática</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(apegoPasRef))">Estilos de apego y alta sensibilidad (PAS)</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(manipulacionRef))">Evitar manipulación y “tests”</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(accionesRef))">Plan de acciones empáticas</button></li>
+    <li><button type="button" class="btn btn-link p-0" @onclick="@(() => ScrollToRef(indicadoresRef))">Indicadores de progreso</button></li>
+</ol>
+
+<h2 id="autoempatia" @ref="autoempatiaRef">1. Autoempatía profunda</h2>
+<p class="small">Comprenderte evita proyectar heridas sobre otros. Empatía contigo es reconocer tu historia sin auto‑acusación.</p>
+<ul class="small">
+    <li>No hay algo “defectuoso”: hay aprendizajes pendientes y heridas que sanar.</li>
+    <li>Explora tu estilo de apego, detonantes, necesidades relacionales, ritmo de energía.</li>
+    <li>Registra semanalmente emociones intensas: situación, sensación corporal, pensamiento automático, respuesta alternativa.</li>
+    <li>Práctica de cuidado: sueño suficiente, ejercicio 3×/sem, pausa de silencio, naturaleza.</li>
+</ul>
+
+<h2 id="amistades" @ref="amistadesRef">2. Empatía con amistades y potenciales parejas</h2>
+<ul class="small">
+    <li>La amistad es un laboratorio de empatía: escucha, validación y presencia antes de romance.</li>
+    <li>No descartes a mejores amigos por miedo: negar posibilidad envía mensaje de insuficiencia.</li>
+    <li>Beneficio de la duda ante primeras impresiones y divergencias culturales.</li>
+    <li>Evita idealizar tras momentos de vulnerabilidad (distinguir empatía de enamoramiento).</li>
+</ul>
+
+<h2 id="principios" @ref="principiosRef">3. Principios y valores con empatía</h2>
+<p class="small">Firmeza empática no impone; comunica límites desde respeto y propósito compartido.</p>
+<ul class="small">
+    <li>Lista 3 no negociables (ej: fe activa, respeto mutuo, integridad) y 5 preferencias flexibles.</li>
+    <li>Revisión trimestral: ¿siguen alineados a tu crecimiento y servicio?</li>
+    <li>Evita “yugo desigual” también en madurez emocional/espiritual: acompañar ≠ salvar.</li>
+</ul>
+
+<h2 id="espera-activa" @ref="esperaActivaRef">4. Esperar activo vs esperar pasivo</h2>
+<ul class="small">
+    <li>Pasivo: queja + inmovilidad + círculos cerrados.</li>
+    <li>Activo: formación, comunidad, servicio, ampliación de círculos, sanidad personal.</li>
+    <li>Acción mensual: 2 actividades nuevas (voluntariado, estudio bíblico, deporte grupal).</li>
+</ul>
+
+<h2 id="fechas-limite" @ref="fechasLimiteRef">5. Fechas límite empáticas</h2>
+<ul class="small">
+    <li>Protegen tu tiempo y el de otros. Evitan esperanza indefinida que bloquea crecimiento.</li>
+    <li>Ejemplo: “Exploro amistad + posibilidad romántica hasta 3‑4 meses; si no hay intención clara, cierro esa vía con respeto”.</li>
+    <li>Fe + acción: orar, discernir, actuar responsablemente (Ecl 11:4).</li>
+</ul>
+
+<h2 id="orgullo" @ref="orgulloRef">6. Transformar orgullo en humildad empática</h2>
+<ul class="small">
+    <li>Reformula exigencias rígidas (virginidad, título, dinero, status) en preguntas de carácter: “¿Cómo cuidas integridad, responsabilidad, generosidad?”</li>
+    <li>Pregúntate: “¿Estoy pidiendo algo que no practico?”</li>
+    <li>Orgullo genera distancia; humildad abre aprendizaje mutuo.</li>
+</ul>
+
+<h2 id="sanidad-perdon" @ref="sanidadPerdonRef">7. Sanidad emocional y perdón de corazón</h2>
+<ul class="small">
+    <li>Señales de falso perdón: reactividad alta, generalizaciones (“todos son…”), uso de ofensa pasada como arma.</li>
+    <li>Proceso empático: reconocer dolor, dialogar, comprender sin excusar, decidir soltar, acordar prevención.</li>
+    <li>Checklist de revisión: ¿puedo narrar el evento con calma? ¿Hay apertura a nuevas experiencias?</li>
+</ul>
+
+<h2 id="circulos-sociales" @ref="circulosSocialesRef">8. Círculos sociales y expansión respetuosa</h2>
+<ul class="small">
+    <li>Empatía expande: no te aíslas; integras contextos diversos (fe, cultura, deporte, servicio).</li>
+    <li>Lista de lugares: iglesia, estudios, ayuda social, club lectura, feria agricultor, gimnasio, senderismo, teatro.</li>
+    <li>Acción semanal: conocer 2 personas nuevas con 3 preguntas genuinas.</li>
+</ul>
+
+<h2 id="comunicacion" @ref="comunicacionRef">9. Comunicación empática vs crítica/queja</h2>
+<ul class="small">
+    <li>Crítica globaliza identidad (“siempre”, “nunca”). Empatía describe hechos concretos.</li>
+    <li>Formato: Hecho + Emoción + Necesidad + Petición (“Cuando no respondes horas, me siento inquieto; necesito conexión; ¿podemos acordar ventana de respuesta?”).</li>
+    <li>Escucha reflejante: “Lo que entiendo es…” + validar + preguntar ajuste.</li>
+</ul>
+
+<h2 id="intensidad" @ref="intensidadRef">10. Intensidad, límites y espacio</h2>
+<ul class="small">
+    <li>Empatía respeta ritmo del otro: evita sofocar (mensajes constantes, demanda exclusiva de atención).</li>
+    <li>Señales de intensidad no regulada: ansiedad si no responde rápido, invasión de tiempo laboral, celos sin evidencia.</li>
+    <li>Estrategia: acordar ventanas de comunicación, pausas conscientes ante activación emocional.</li>
+</ul>
+
+<h2 id="apariencia" @ref="aparienciaRef">11. Apariencia física y dignidad permanente</h2>
+<ul class="small">
+    <li>El cuerpo cambia: empatía se centra en salud, cuidado y presencia, no perfección irreal de medios.</li>
+    <li>Pregunta empática: “¿Cómo puedo apoyar tu bienestar físico sin presionarte?”</li>
+    <li>Prepararte para cambios (enfermedad, embarazo, envejecimiento) fortalece amor decidido.</li>
+</ul>
+
+<h2 id="proyecto-vida" @ref="proyectoVidaRef">12. Proyecto de vida y compatibilidad empática</h2>
+<ul class="small">
+    <li>Proyecto claro evita relaciones sin dirección; permite evaluar alineación de valores y metas.</li>
+    <li>Metas 3 niveles: corto (hábitos), medio (formación/servicio), largo (familia/propósito).</li>
+    <li>Conversación clave: “¿Qué sacrificios estás dispuesto(a) a hacer por familia y relación?”</li>
+</ul>
+
+<h2 id="apego-pas" @ref="apegoPasRef">13. Estilos de apego y alta sensibilidad (PAS)</h2>
+<ul class="small">
+    <li>Apego ansioso: necesidad de confirmación → práctica de auto‑calma antes de buscar respuesta.</li>
+    <li>Apego evitativo: distancia protectora → micro‑aperturas programadas (compartir emociones simples).</li>
+    <li>Desorganizado: busca apoyo profesional + estructura de seguridad comunicada.</li>
+    <li>PAS: proteger de sobrecarga sensorial y emocional (pausas, naturaleza, reducción de multitarea social).</li>
+</ul>
+
+<h2 id="manipulacion" @ref="manipulacionRef">14. Evitar manipulación y “tests”</h2>
+<ul class="small">
+    <li>“Shit tests” = control + inseguridad: reemplaza con solicitud directa y vulnerabilidad.</li>
+    <li>Indicadores de ambiente sano: claridad de intención, ausencia de juegos de poder, ajustes negociados.</li>
+    <li>Pregunta empática: “¿Qué necesitarías para sentir confianza aquí sin probarme?”</li>
+</ul>
+
+<h2 id="acciones" @ref="accionesRef">15. Plan de acciones empáticas</h2>
+<ul class="small">
+    <li>Diario: ejercicio moderado, agradecimiento (3 agradecimientos), reflexión corta de interacción social.</li>
+    <li>Semanal: 1 nueva persona conocida, 1 práctica de escucha en silencio, revisión de progreso emocional.</li>
+    <li>Mensual: ajuste de metas, evaluación de círculos sociales, registro de avances en sanidad y perdón.</li>
+    <li>Trimestral: revisión no negociables y proyecto de vida; descarte de expectativas irreales detectadas.</li>
+</ul>
+
+<h2 id="indicadores" @ref="indicadoresRef">16. Indicadores de progreso</h2>
+<ul class="small">
+    <li>Menos generalizaciones y más lenguaje específico.</li>
+    <li>Reducción de reactividad fisiológica ante recuerdos difíciles.</li>
+    <li>Incremento de amistades de calidad y actividades intencionales.</li>
+    <li>Coherencia entre lo que solicitas y aportas (reciprocidad visible).</li>
+    <li>Decisiones oportunas de soltar relaciones estancadas sin resentimiento.</li>
+</ul>
+
+<p class="small text-muted mt-4">Empatía guía tu búsqueda: dignidad, honestidad, límites y acción.</p>
+
+@code {
+    private ElementReference autoempatiaRef;
+    private ElementReference amistadesRef;
+    private ElementReference principiosRef;
+    private ElementReference esperaActivaRef;
+    private ElementReference fechasLimiteRef;
+    private ElementReference orgulloRef;
+    private ElementReference sanidadPerdonRef;
+    private ElementReference circulosSocialesRef;
+    private ElementReference comunicacionRef;
+    private ElementReference intensidadRef;
+    private ElementReference aparienciaRef;
+    private ElementReference proyectoVidaRef;
+    private ElementReference apegoPasRef;
+    private ElementReference manipulacionRef;
+    private ElementReference accionesRef;
+    private ElementReference indicadoresRef;
+
+    private async Task ScrollToRef(ElementReference el)
+    {
+        await JS.InvokeVoidAsync("scrollHelpers.scrollIntoViewElement", el);
+    }
+}

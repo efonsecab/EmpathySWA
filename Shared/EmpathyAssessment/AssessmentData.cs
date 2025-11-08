@@ -152,6 +152,10 @@ namespace BlazorApp.Shared.EmpathyAssessment
                     new EmpathyQuestion { Text = "¿Invalidas sus límites físicos o emocionales?", Explanation = "Vulnera su seguridad y autonomía corporal/emocional.", Example = "Ej: Insistir en abrazar cuando pidió espacio.", SelfImpact = "Daña tu reputación como pareja segura; arriesga rupturas y soledad." },
                     new EmpathyQuestion { Text = "¿Trivializas temas que para tu pareja son centrales?", Explanation = "Niega importancia a lo que le duele/importa, dejándola sola con ello.", Example = "Ej: 'Eso no es importante, ya supéralo'.", SelfImpact = "Pierdes acceso a su mundo interno; disminuye la complicidad y el apoyo mutuo." },
                     new EmpathyQuestion { Text = "¿Evitas ofrecer disculpas claras cuando te equivocas?", Explanation = "Impide reparación y mantiene resentimientos activos.", Example = "Ej: 'Perdón si te ofendiste' evitando responsabilidad.", SelfImpact = "Te quedas atrapado en conflictos repetidos; baja tu paz y bienestar." },
+                    new EmpathyQuestion { Text = "¿Discutes en lugares públicos exponiendo a tu pareja?", Explanation = "Aumenta vergüenza y vulnerabilidad; erosiona confianza y seguridad.", Example = "Ej: Elevar la voz en un restaurante frente a otras personas.", SelfImpact = "Daña tu imagen y la cooperación; puedes perder la relación por desgaste." },
+                    new EmpathyQuestion { Text = "¿Realizas bromas pesadas a su costa?", Explanation = "Humilla y siembra inseguridad; normaliza microagresión.", Example = "Ej: Burlarte de su apariencia o habilidades frente a amistades.", SelfImpact = "Te perciben poco seguro para la intimidad; pierdes cercanía real." },
+                    new EmpathyQuestion { Text = "¿Controlas con quién sale o revisas su teléfono?", Explanation = "Control invade autonomía y comunica desconfianza crónica.", Example = "Ej: Exigir contraseñas o prohibir amistades.", SelfImpact = "Aumenta ansiedad y celos; te encierra en relaciones tóxicas y frágiles." },
+                    new EmpathyQuestion { Text = "¿Dejas de hacer tiempo de calidad para la relación?", Explanation = "Prioriza todo sobre el vínculo; comunica desinterés y baja inversión.", Example = "Ej: Semanas sin planear un espacio a solas.", SelfImpact = "Empobrece tu conexión; aumenta riesgo de ruptura y soledad." },
                 },
                 DailyPractices = new List<string>
                 {
@@ -159,7 +163,10 @@ namespace BlazorApp.Shared.EmpathyAssessment
                     "Agradecer una vulnerabilidad compartida.",
                     "Confirmar un límite y respetarlo conscientemente.",
                     "Enviar un mensaje de aprecio específico cada día.",
-                    "Practicar una disculpa sin excusas cuando corresponda."
+                    "Practicar una disculpa sin excusas cuando corresponda.",
+                    "Evitar discutir en público: pausar y acordar un lugar/tiempo seguro.",
+                    "Renunciar a bromas a costa de la pareja.",
+                    "Planear un espacio semanal de pareja sin pantallas.",
                 }
             },
             new EmpathyCategory
@@ -317,6 +324,9 @@ namespace BlazorApp.Shared.EmpathyAssessment
                     new EmpathyQuestion { Text = "¿Menosprecias su forma de criar o decidir frente a otros?", Explanation = "Hiere respeto mutuo y autoridad compartida, dejando expuesto al otro.", Example = "Ej: Corregir frente a familiares con tono burlón.", SelfImpact = "Daña tu alianza como pareja; pierdes respaldo en decisiones." },
                     new EmpathyQuestion { Text = "¿Descalificas sus pasatiempos o intereses?", Explanation = "Reduce identidad y autonomía personal dentro de la relación.", Example = "Ej: 'Tu hobby es una pérdida de tiempo'.", SelfImpact = "Limita tu mundo compartido; empobrece la alegría y complicidad." },
                     new EmpathyQuestion { Text = "¿Interrumpes o dominas las conversaciones familiares?", Explanation = "Limita su voz y participación equitativa, restándole agencia.", Example = "Ej: Responder por tu pareja sin consultarle.", SelfImpact = "Te vuelve controlador; reduce la confianza hacia tu liderazgo en casa." },
+                    new EmpathyQuestion { Text = "¿Expones la relación en redes sociales buscando validación?", Explanation = "Vuelve íntimos asuntos públicos y abre espacio a chismes y malentendidos.", Example = "Ej: Publicar conflictos o detalles sensibles.", SelfImpact = "Aumenta tensiones; reduces privacidad y paz en el vínculo." },
+                    new EmpathyQuestion { Text = "¿Niega afecto o cercanía como forma de castigo?", Explanation = "Retira cuidado esencial y crea inseguridad crónica.", Example = "Ej: Evitar contacto por días tras enojo menor.", SelfImpact = "Te priva de intimidad; eleva resentimiento y distancia emocional." },
+                    new EmpathyQuestion { Text = "¿Nunca oran/reflexionan juntos por la relación?", Explanation = "Pierde un espacio de co-regulación y propósito compartido.", Example = "Ej: Evitar momentos de conexión espiritual.", SelfImpact = "Menos resiliencia ante crisis; disminuye sentido de equipo y propósito." },
                 },
                 DailyPractices = new List<string>
                 {
@@ -324,64 +334,35 @@ namespace BlazorApp.Shared.EmpathyAssessment
                     "Agendar un espacio semanal de conversación sin pantallas.",
                     "Validar primero su emoción antes de debatir soluciones.",
                     "Compartir de forma transparente un dato relevante (tiempo, finanzas).",
-                    "Reconocer un punto fuerte de tu cónyuge cada día."
+                    "Reconocer un punto fuerte de tu cónyuge cada día.",
+                    "Orar/meditar juntos 5 minutos por la relación.",
+                    "Evitar publicaciones sensibles sobre la relación en redes.",
                 }
             },
             new EmpathyCategory
             {
-                Id = "hijos-e-hijas",
-                Title = "Hijos e Hijas",
-                Description = "Acciones que afectan la empatía hacia hijos e hijas.",
+                Id = "amar-responsablemente",
+                Title = "Amar responsablemente",
+                Description = "Patrones y prácticas para amar de forma sana y responsable (respeto, honestidad, límites, apoyo y crecimiento conjunto).",
                 Questions = new List<EmpathyQuestion>
                 {
-                    new EmpathyQuestion { Text = "¿Descalificas sus emociones con frases como 'no llores'?", Explanation = "Niega su derecho a sentir y a aprender a autorregularse de forma sana.", Example = "Ej: Decir 'Las personas grandes no lloran'.", SelfImpact = "Dificulta tu conexión; pierdes su confianza y apertura." },
-                    new EmpathyQuestion { Text = "¿Reaccionas con burla cuando cometen errores?", Explanation = "Instala vergüenza tóxica y miedo a intentar de nuevo.", Example = "Ej: Reírse del dibujo mal hecho frente a otras personas.", SelfImpact = "Aumenta su distancia contigo; te priva de momentos de aprendizaje juntos." },
-                    new EmpathyQuestion { Text = "¿Comparas frecuentemente a tus hijos entre sí o con otros?", Explanation = "Introduce competencia y desvaloriza su identidad individual.", Example = "Ej: 'Tu hermano/a sí saca buenas notas'.", SelfImpact = "Erosiona la armonía familiar; te genera más conflictos y culpa." },
-                    new EmpathyQuestion { Text = "¿Ignoras señales de necesidad de atención positiva?", Explanation = "Desatiende su necesidad de conexión y puede escalar conductas disruptivas.", Example = "Ej: No responder a intentos repetidos de mostrarte algo.", SelfImpact = "Dificulta tu autoridad positiva; aumentan tus tensiones diarias." },
-                    new EmpathyQuestion { Text = "¿Respondes con gritos por situaciones menores?", Explanation = "Aumenta ansiedad y reduce su sensación de seguridad contigo.", Example = "Ej: Gritar por un vaso de agua derramado.", SelfImpact = "Agota tu energía; empeora el clima en casa y tu bienestar." },
-                    new EmpathyQuestion { Text = "¿No dedicas tiempo exclusivo sin dispositivos?", Explanation = "Empobrece el vínculo y dificulta la confianza relacional.", Example = "Ej: Estar siempre mirando el móvil durante juego.", SelfImpact = "Pierdes recuerdos valiosos; baja tu satisfacción como madre/padre/cuidador." },
-                    new EmpathyQuestion { Text = "¿Subestimas sus logros pequeños sin celebrarlos?", Explanation = "Desmotiva y borra su percepción de progreso.", Example = "Ej: Ignorar que leyó una página completa solo/a.", SelfImpact = "Te pierdes de reforzar hábitos positivos; afecta su cooperación contigo." },
+                    new EmpathyQuestion { Text = "¿Buscas 'conquistar' sin intención de compromiso?", Explanation = "Instrumentaliza a la persona y trivializa su dignidad y proyecto de vida.", Example = "Ej: Sostener vínculos paralelos por entretenimiento.", SelfImpact = "Relaciones superficiales y frágiles; aumentan culpas y conflictos." },
+                    new EmpathyQuestion { Text = "¿Te cuesta ser honesto y vulnerable sobre tus miedos y límites?", Explanation = "Opaca la confianza y deja a tu pareja sin mapa para cuidarte/cuidarse.", Example = "Ej: Ocultar ansiedad, deudas o heridas relevantes.", SelfImpact = "Te aísla; dificulta recibir apoyo y crecer juntos." },
+                    new EmpathyQuestion { Text = "¿Te pones a la defensiva ante feedback constructivo?", Explanation = "Bloquea aprendizaje y reparación; sostiene ciclos de conflicto.", Example = "Ej: Responder atacando en lugar de escuchar.", SelfImpact = "Repites errores; pierdes paz y calidad del vínculo." },
+                    new EmpathyQuestion { Text = "¿Practicas desprecio, sarcasmo o soberbia en desacuerdos?", Explanation = "Deshumaniza; uno de los predictores más fuertes de ruptura.", Example = "Ej: Ojos en blanco y burlas en discusión.", SelfImpact = "Erosiona tu autoridad moral; te quedas solo en tu orgullo." },
+                    new EmpathyQuestion { Text = "¿Evades conflictos en lugar de resolverlos?", Explanation = "Acumula resentimientos y agranda problemas pendientes.", Example = "Ej: Cambiar de tema, posponer indefinidamente.", SelfImpact = "Carga mental alta; clima relacional tenso y frío." },
+                    new EmpathyQuestion { Text = "¿Intentas controlar (horarios, amistades, vestimenta)?", Explanation = "Invade autonomía y crea miedo; no construye confianza real.", Example = "Ej: Revisar teléfono, prohibir amistades.", SelfImpact = "Aumenta celos y ansiedad; pierdes cooperación voluntaria." },
+                    new EmpathyQuestion { Text = "¿Minimizas su fe o su crecimiento espiritual?", Explanation = "Niega una dimensión central de sentido y co-regulación.", Example = "Ej: Burlarse de su oración o impedir asistir a comunidad.", SelfImpact = "Menos propósito compartido y resiliencia ante crisis." },
+                    new EmpathyQuestion { Text = "¿Descuidas tu autocuidado (sueño, salud, emociones)?", Explanation = "Sin autoempatía es difícil sostener empatía hacia otros.", Example = "Ej: No dormir y responder con irritabilidad crónica.", SelfImpact = "Elevas reactividad; reduces calidad de presencia y amor." },
                 },
                 DailyPractices = new List<string>
                 {
-                    "Validar una emoción antes de corregir conducta.",
-                    "Dedicar 10 minutos de juego o conversación uno a uno.",
-                    "Celebrar un esfuerzo, no solo el resultado.",
-                    "Practicar tono calmado para correcciones menores.",
-                    "Escuchar una historia completa sin interrumpir."
-                }
-            },
-            new EmpathyCategory
-            {
-                Id = "etiquetas-y-microagresiones",
-                Title = "Etiquetas y Microagresiones Bien Intencionadas",
-                Description = "Expresiones, elogios o clasificaciones que parecen positivas pero refuerzan estereotipos, jerarquías o discriminación sutil.",
-                Questions = new List<EmpathyQuestion>
-                {
-                    new EmpathyQuestion { Text = "¿Usas etiquetas como 'mujer de alto valor' / 'hombre de alto valor' para jerarquizar dignidad?", Explanation = "Implica que existen mujeres/hombres de 'bajo valor'; cosifica y jerarquiza la dignidad humana, perpetuando comparación y discriminación.", Example = "Ej: Decir 'Esa persona sí es de alto valor, tú deberías mejorar'.", SelfImpact = "Te encierra en comparaciones; te aleja de vínculos igualitarios y genuinos." },
-                    new EmpathyQuestion { Text = "¿Refieres que alguien 'no es como los demás de su grupo' como elogio?", Explanation = "Reproduce prejuicios al sugerir que su grupo es inferior por defecto.", Example = "Ej: 'Tienes muy buenos modales para ser de ese barrio'.", SelfImpact = "Te vuelve ciego a la diversidad; pierdes relaciones ricas y auténticas." },
-                    new EmpathyQuestion { Text = "¿Elogias capacidades básicas usando tono paternalista?", Explanation = "Minimiza su autonomía y posiciona a la persona como incapaz sin fundamento.", Example = "Ej: 'Qué valiente que viniste solo/a' a una persona adulta funcional.", SelfImpact = "Te perciben condescendiente; reduces cooperación y apertura contigo." },
-                    new EmpathyQuestion { Text = "¿Haces comentarios sobre apariencia 'exótica' o 'diferente' como si fueran cumplidos?", Explanation = "Marca otredad y reduce la identidad a rasgos físicos, exotizando.", Example = "Ej: 'Tu cabello es tan exótico, nunca había visto algo así'.", SelfImpact = "Empobrece tu sensibilidad intercultural; te aíslas en prejuicios." },
-                    new EmpathyQuestion { Text = "¿Asumes que alguien representa a todo su grupo social o cultural?", Explanation = "Carga de vocería injusta y borra la diversidad interna del grupo.", Example = "Ej: '¿Qué opinan los de tu país de esto?'", SelfImpact = "Te vuelve menos preciso; pierdes credibilidad y vínculos de confianza." },
-                    new EmpathyQuestion { Text = "¿Realizas explicaciones condescendientes no solicitadas (mansplaining/womansplaining) por suponer desconocimiento?", Explanation = "Invalida su competencia y refuerza roles de poder por género/estatus; puede darse en cualquier dirección.", Example = "Ej: Explicar términos básicos a una persona experta en el tema.", SelfImpact = "Daña tu imagen profesional; otros evitarán aprender contigo." },
-                    new EmpathyQuestion { Text = "¿Elogias algo seguido de un 'para ser...'", Explanation = "El elogio condicional implica deficiencia base en la categoría ('para ser X') y refuerza estereotipos.", Example = "Ej: 'Hablas muy bien español para ser persona extranjera'.", SelfImpact = "Limita tu capacidad de reconocer méritos sin sesgos; empobrece tus redes." },
-                    new EmpathyQuestion { Text = "¿Dices 'no veo color / género / diferencia' para evitar reconocer realidades?", Explanation = "Invisibiliza experiencias de discriminación y niega apoyo a necesidades específicas.", Example = "Ej: 'Yo no veo género, todos son iguales' cuando alguien describe una discriminación.", SelfImpact = "Te impide aprender y crecer; te desconecta de cambios positivos." },
-                    new EmpathyQuestion { Text = "¿Usas frases como 'todas las mujeres son...' o 'los hombres siempre...' en tono de consejo?", Explanation = "Generaliza y esencializa, manteniendo sesgos y trato desigual.", Example = "Ej: 'Las personas de X género solo buscan seguridad económica'.", SelfImpact = "Empobrece tus relaciones; reduces la empatía y el respeto que recibes." },
-                    new EmpathyQuestion { Text = "¿Etiquetas a personas con 'energía masculina/femenina' para validar o invalidar comportamientos?", Explanation = "Encasilla y prescribe roles rígidos que inhiben la expresión genuina.", Example = "Ej: 'Deberías cultivar tu \"energía femenina\" y dejar de ser tan racional'.", SelfImpact = "Te limita en tu propia expresión; te aísla de vínculos flexibles y sanos." },
-                    new EmpathyQuestion { Text = "¿Das cumplidos centrados sólo en atributos físicos cuando la persona comparte logros?", Explanation = "Desvía reconocimiento del esfuerzo y refuerza evaluación superficial.", Example = "Ej: Tras hablar de un proyecto: 'Lo importante es que te ves muy bien haciéndolo'.", SelfImpact = "Te desconecta del mérito real; empobrece tu criterio y tus relaciones." },
-                    new EmpathyQuestion { Text = "¿Supones fragilidad y tomas decisiones por alguien sin preguntar?", Explanation = "Quita agencia y consolida dependencia, anulando su voz.", Example = "Ej: Contestar por la persona en una reunión: 'No puede con eso ahora'.", SelfImpact = "Te sobrecargas y controlas en exceso; reduces la colaboración contigo." },
-                    new EmpathyQuestion { Text = "¿Usas humor para normalizar estereotipos ('broma inofensiva')?", Explanation = "Las 'bromas' sostienen sesgos y legitiman microagresiones repetidas.", Example = "Ej: 'Es chiste, todos los de X son tacaños'.", SelfImpact = "Te asocian con prejuicios; pierdes reputación y vínculos de calidad." },
-                    new EmpathyQuestion { Text = "¿Elogias la 'asimilación' a tu cultura o estilo como superior?", Explanation = "Impone una norma dominante y desvaloriza el origen o identidad propia.", Example = "Ej: 'Ya hablas casi como nosotros, así te aceptarás más'.", SelfImpact = "Limita tu mundo; reduces tu capacidad de aprender de la diversidad." },
-                    new EmpathyQuestion { Text = "¿Utilizas espiritualidad o desarrollo personal para invalidar emociones ('solo vibra alto')?", Explanation = "Silencia procesos legítimos de dolor y responsabiliza a la víctima de su malestar.", Example = "Ej: 'No estés triste, eleva tu frecuencia y ya'.", SelfImpact = "Te desconecta de tu propia humanidad; bloquea tu crecimiento emocional." },
-                },
-                DailyPractices = new List<string>
-                {
-                    "Preguntar antes de asumir necesidades o conocimientos.",
-                    "Elogiar esfuerzo y proceso en lugar de jerarquizar 'valor humano'.",
-                    "Escuchar experiencias sin negar diferencias reales.",
-                    "Evitar generalizaciones y reemplazarlas por casos específicos.",
-                    "Validar emociones sin espiritualizar para omitir el dolor.",
-                    "Usar lenguaje que afirme dignidad sin comparar categorías humanas.",
+                    "Preguntar: '¿Cómo estuvo tu día?' y escuchar 2 minutos sin interrumpir.",
+                    "Decir 1 razón específica por la que amas/valoras hoy.",
+                    "Orar/meditar juntos por 3–5 minutos.",
+                    "Acordar límites y respetarlos activamente.",
+                    "Practicar una disculpa completa cuando corresponda.",
+                    "Planear una micro-cita (20–30 min) semanal.",
                 }
             },
         };
