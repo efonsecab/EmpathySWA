@@ -1,5 +1,6 @@
 @page "/curso-amar-al-projimo"
 @using BlazorApp.Shared.EmpathyAssessment
+@inject IJSRuntime JS
 
 <PageTitle>Curso: Cómo amar al prójimo</PageTitle>
 
@@ -107,8 +108,98 @@
 <p class="small text-muted">Debajo se integran contenidos ampliados. Semana 1 incluye tu introducción, preguntas y definición RAE.</p>
 
 @code {
-    private bool w1 = true, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12;
+    private bool w1 = true, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12 = true;
     private void Toggle(ref bool section) => section = !section;
+
+    // Modelo para tabla editable de mapeo dones → voluntariado / laboral
+    private class DonMapa
+    {
+        public string Don { get; set; } = string.Empty; // Don o sensibilidad emergente
+        public string HeridaAsociada { get; set; } = string.Empty; // Herida que dio origen (breve)
+        public string Voluntariado { get; set; } = string.Empty; // Área concreta de servicio
+        public string AccionVoluntariado { get; set; } = string.Empty; // Primera micro‑acción
+        public string RolLaboral { get; set; } = string.Empty; // Rol/función profesional aplicable
+        public string AccionLaboral { get; set; } = string.Empty; // Acción inicial en contexto laboral
+        public string Indicadores { get; set; } = string.Empty; // Métricas simples (2 máximo)
+    }
+
+    private List<DonMapa> filas = new();
+    private const string StorageKey = "cursoAmarProjimo_donesMapa_v1";
+    private bool cargado;
+    private string? mensajeGuardado;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await CargarAsync();
+            StateHasChanged();
+        }
+    }
+
+    private DonMapa NuevaFila() => new DonMapa
+    {
+        Don = string.Empty,
+        HeridaAsociada = string.Empty,
+        Voluntariado = string.Empty,
+        AccionVoluntariado = string.Empty,
+        RolLaboral = string.Empty,
+        AccionLaboral = string.Empty,
+        Indicadores = string.Empty
+    };
+
+    private void AgregarFila()
+    {
+        filas.Add(NuevaFila());
+    }
+
+    private void EliminarFila(int index)
+    {
+        if (index >= 0 && index < filas.Count)
+            filas.RemoveAt(index);
+    }
+
+    private async Task GuardarAsync()
+    {
+        var json = System.Text.Json.JsonSerializer.Serialize(filas);
+        await JS.InvokeVoidAsync("localStorage.setItem", StorageKey, json);
+        mensajeGuardado = $"Guardado {DateTime.Now:HH:mm:ss}";
+    }
+
+    private async Task CargarAsync()
+    {
+        try
+        {
+            var json = await JS.InvokeAsync<string?>("localStorage.getItem", StorageKey);
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                var datos = System.Text.Json.JsonSerializer.Deserialize<List<DonMapa>>(json);
+                if (datos != null) filas = datos;
+            }
+            if (filas.Count == 0)
+            {
+                // Plantilla inicial de 3 filas
+                filas = new List<DonMapa>
+                {
+                    new DonMapa{Don="Escucha profunda", HeridaAsociada="Duelo", Voluntariado="Grupo de duelo", AccionVoluntariado="Facilitar círculo 10min escucha", RolLaboral="Atención cliente", AccionLaboral="Aplicar protocolo escuchar‑reencuadrar", Indicadores="NPS, recontactos"},
+                    new DonMapa{Don="Hospitalidad segura", HeridaAsociada="Rechazo social", Voluntariado="Bienvenida", AccionVoluntariado="Crear saludo personalizado", RolLaboral="Facilities", AccionLaboral="Rediseñar sala espera", Indicadores="Satisfacción, tiempo espera"},
+                    new DonMapa{Don="Mediación de conflictos", HeridaAsociada="Abuso emocional", Voluntariado="Comité paz", AccionVoluntariado="Registrar acuerdos en acta", RolLaboral="Ombudsperson", AccionLaboral="Estandarizar formato mediación", Indicadores="Reincidencia, tiempo resolución"}
+                };
+            }
+            cargado = true;            
+        }
+        catch (Exception ex)
+        {
+            mensajeGuardado = "Error al cargar: " + ex.Message;
+        }
+    }
+
+    private async Task LimpiarAsync()
+    {
+        filas.Clear();
+        await JS.InvokeVoidAsync("localStorage.removeItem", StorageKey);
+        mensajeGuardado = "Se limpió el mapeo";
+    }
 }
 
 <!-- Semana 1 -->
@@ -525,59 +616,60 @@
     {
         <div class="card-body">
             <h5>¿Cómo Dios usa tus heridas para desarrollar tus dones?</h5>
-            <p class="small">Todo lo que Dios permite es para nuestro bien, incluso lo difícil. El dolor procesado con verdad y acompañamiento se convierte en terreno fértil para dones y servicio. Las heridas aumentan sensibilidad específica, afinan discernimiento de necesidades y canalizan propósito.</p>
-            <h6>Mecanismos de transformación (proceso resumido)</h6>
-            <ul class="small">
-                <li><strong>Exposición:</strong> La experiencia dolorosa revela límites y dependencia (2 Cor 12:9 implícito en el principio de gracia en debilidad).</li>
-                <li><strong>Quebranto:</strong> Disminuye orgullo y juicio; abre espacio a humildad y mansedumbre (Fil 2:3-4).</li>
-                <li><strong>Empatía específica:</strong> Reconoces micro‑señales de dolor que antes ignorabas (gestos, silencios, tono).</li>
-                <li><strong>Redención:</strong> Reinterpretar la historia sin negar daño; enfocar en aprendizaje y servicio futuro.</li>
-                <li><strong>Enfoque:</strong> De múltiples intereses dispersos a propósito centrado en aliviar sufrimiento similar.</li>
-                <li><strong>Multiplicación:</strong> Tu práctica nutre a otros que replican cuidado (cultura de servicio).</li>
-            </ul>
-            <h6 class="mt-3">Mapeo dones → voluntariado (con ejemplos)</h6>
-            <ul class="small">
-                <li><strong>Escucha profunda</strong> → Grupos de duelo/consuelo. Facilitar círculo 60 min (escuchar‑reflejar‑validar); indicador: menos interrupciones y más verbalización regulada.</li>
-                <li><strong>Hospitalidad segura</strong> → Bienvenida/recepción. Protocolo de saludo por nombre, zona calma, seguimiento en 72h a nuevos asistentes.</li>
-                <li><strong>Consejería laica empática</strong> → Grupo de apoyo. Serie 6 sesiones (límites, pedir ayuda, reparación) + guía de derivación profesional.</li>
-                <li><strong>Mentoría relacional</strong> → Jóvenes/adolescentes. Plan 12 semanas con metas SMART y chequeos 30/60/90.</li>
-                <li><strong>Intercesión sostenida</strong> → Red de oración. Calendario compartido, actualización de casos y agradecimientos.</li>
-                <li><strong>Docencia formativa</strong> → Taller manejo emocional. Módulo 90 min (H‑E‑N‑P) con role‑plays.</li>
-                <li><strong>Mediación de conflictos</strong> → Comité de paz. Sesión tripartita con reglas, acuerdos escritos y revisión a 14 días.</li>
-                <li><strong>Creatividad terapéutica</strong> → Arte/música terapéutica. Sesión semanal con ritual de cierre de gratitud.</li>
-                <li><strong>Organización logística</strong> → Banco de alimentos. Rutas, turnos, KPI: tiempo de entrega y errores por lote.</li>
-                <li><strong>Empatía intercultural</strong> → Apoyo a migrantes. Mentoría 1:1, glosario básico y acompañamiento a trámites.</li>
-                <li><strong>Defensa del vulnerable</strong> → Advocacy local. Mapeo de recursos y ficha de derechos; acompañamiento a audiencias.</li>
-                <li><strong>Humor restaurativo</strong> → Visitas hospitalarias. Micro‑guion respetuoso evitando temas gatillo.</li>
-                <li><strong>Discernimiento de riesgos</strong> → Prevención de abuso. Checklist de alerta + canal de reporte anónimo.</li>
-                <li><strong>Tutoría académica</strong> → Alfabetización. Plan escalonado de lectura y refuerzos positivos.</li>
-                <li><strong>Soporte tecnológico humanizado</strong> → Acompañamiento a mayores. Sesiones 1:1 para configurar comunicación; manual impreso simple.</li>
-            </ul>
-            <h6>Mapeo dones → laboral/profesional (con ejemplos)</h6>
-            <ul class="small">
-                <li><strong>Escucha profunda</strong> → Atención al cliente avanzado. Protocolo 3 pasos (escuchar‑reencuadrar‑resolver); medir NPS y recontactos.</li>
-                <li><strong>Hospitalidad segura</strong> → Facilities/recepción. Rediseño de sala de espera (luz, ruido, señalética); encuesta de satisfacción.</li>
-                <li><strong>Consejería laica empática</strong> → Bienestar (RH). Orientaciones iniciales + derivaciones; reporte mensual de temas recurrentes.</li>
-                <li><strong>Mentoría relacional</strong> → Mentoring corporativo. Emparejamiento, bitácora de objetivos, revisión trimestral.</li>
-                <li><strong>Docencia formativa</strong> → Formación soft skills. Curso de CNV con evaluación pre/post y prácticas.</li>
-                <li><strong>Mediación de conflictos</strong> → Ombudsperson/RH. Mediaciones con acuerdos documentados; indicador: reincidencia.</li>
-                <li><strong>Creatividad terapéutica</strong> → Contenido educativo. Guías visuales de manejo de estrés para onboarding.</li>
-                <li><strong>Organización logística</strong> → Project management. Kanban + retrospectivas centradas en salud del equipo.</li>
-                <li><strong>Empatía intercultural</strong> → Customer success global. Adaptar scripts por región; reducir fricción cultural.</li>
-                <li><strong>Defensa del vulnerable</strong> → ONG/trabajo social. Gestión de casos e integración de redes de apoyo.</li>
-                <li><strong>Humor restaurativo</strong> → Comunicación interna. Campañas de bienestar con guía de tono.</li>
-                <li><strong>Discernimiento de riesgos</strong> → Riesgos psicosociales. Mapa + plan de mitigación; encuestas de clima.</li>
-                <li><strong>Tutoría académica</strong> → Orientación escolar. Plan individual + coordinación con familias.</li>
-                <li><strong>Soporte tecnológico humanizado</strong> → Mesa de ayuda TI. Scripts de empatía + encuesta post‑ticket.</li>
-                <li><strong>Intercesión sostenida</strong> → Coordinación comunitaria (fe). Calendario de apoyo y seguimiento sensible.</li>
-            </ul>
-            <h6>Versículos impulso</h6>
-            <div class="row g-2 small">
-                <div class="col-md-6"><BibleVerseByRef Reference="Gálatas 6:2" FallbackTag="cargas" /></div>
-                <div class="col-md-6"><BibleVerseByRef Reference="1 Juan 3:16-18" FallbackTag="acciones" /></div>
-                <div class="col-md-6"><BibleVerseByRef Reference="1 Corintios 13:4-7" FallbackTag="amor" /></div>
-                <div class="col-md-6"><BibleVerseByRef Reference="Filipenses 2:3-4" FallbackTag="humildad" /></div>
-            </div>
+            <p class="small">(Contenido conceptual arriba en versiones previas de la página – se conserva). Usa la tabla para personalizar tu plan.</p>
+
+            <h6>Plan personal (dones ↔ herida ↔ voluntariado ↔ laboral)</h6>
+            @if (!cargado)
+            {
+                <p class="text-muted small">Cargando datos guardados...</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="min-width:140px">Don / Sensibilidad</th>
+                                <th style="min-width:140px">Herida asociada</th>
+                                <th style="min-width:140px">Voluntariado</th>
+                                <th style="min-width:200px">Primera micro‑acción voluntariado</th>
+                                <th style="min-width:160px">Rol laboral</th>
+                                <th style="min-width:200px">Acción inicial laboral</th>
+                                <th style="min-width:160px">Indicadores (máx 2)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @for (int i = 0; i < filas.Count; i++)
+                        {
+                            <tr>
+                                <td><input class="form-control form-control-sm" @bind="filas[i].Don" placeholder="Ej. Escucha profunda" /></td>
+                                <td><input class="form-control form-control-sm" @bind="filas[i].HeridaAsociada" placeholder="Ej. Duelo" /></td>
+                                <td><input class="form-control form-control-sm" @bind="filas[i].Voluntariado" placeholder="Ej. Grupo de duelo" /></td>
+                                <td><input class="form-control form-control-sm" @bind="filas[i].AccionVoluntariado" placeholder="Ej. Facilitar apertura 5min" /></td>
+                                <td><input class="form-control form-control-sm" @bind="filas[i].RolLaboral" placeholder="Ej. Atención cliente" /></td>
+                                <td><input class="form-control form-control-sm" @bind="filas[i].AccionLaboral" placeholder="Ej. Implementar protocolo" /></td>
+                                <td><input class="form-control form-control-sm" @bind="filas[i].Indicadores" placeholder="Ej. NPS, recontactos" /></td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-danger btn-sm" title="Eliminar" @onclick="() => EliminarFila(i)"><span class="bi bi-x"></span></button>
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex gap-2 flex-wrap mb-2">
+                    <button class="btn btn-sm btn-primary" @onclick="AgregarFila"><span class="bi bi-plus-lg"></span> Agregar fila</button>
+                    <button class="btn btn-sm btn-success" @onclick="GuardarAsync"><span class="bi bi-save"></span> Guardar</button>
+                    <button class="btn btn-sm btn-secondary" @onclick="CargarAsync"><span class="bi bi-arrow-clockwise"></span> Recargar</button>
+                    <button class="btn btn-sm btn-outline-warning" @onclick="LimpiarAsync"><span class="bi bi-trash"></span> Limpiar</button>
+                </div>
+                @if (!string.IsNullOrEmpty(mensajeGuardado))
+                {
+                    <div class="alert alert-info py-1 small mb-0">@mensajeGuardado</div>
+                }
+                <p class="small text-muted mt-2">Los datos se guardan solo en tu navegador (localStorage). Puedes exportar copiando el JSON: <code>@StorageKey</code>.</p>
+            }
         </div>
     }
 </div>
