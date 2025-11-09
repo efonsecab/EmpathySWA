@@ -52,6 +52,20 @@
         </div>
 
         <div class="nav-item px-3 mt-2">
+            <button class="btn btn-sm btn-outline-light w-100 text-start" @onclick="() => ToggleSection(ref showCursos)">
+                <span class="bi bi-book" aria-hidden="true"></span>
+                Cursos y Talleres
+                <span class="float-end bi @(showCursos ? "bi-chevron-up" : "bi-chevron-down")"></span>
+            </button>
+            @if (showCursos)
+            {
+                <div class="ps-3 pt-2">
+                    <NavLink class="nav-link" href="curso-amar-al-projimo"><span class="bi bi-journal-richtext" aria-hidden="true"></span> Amar al prójimo</NavLink>
+                </div>
+            }
+        </div>
+
+        <div class="nav-item px-3 mt-2">
             <button class="btn btn-sm btn-outline-light w-100 text-start" @onclick="() => ToggleSection(ref showRelaciones)">
                 <span class="bi bi-heart" aria-hidden="true"></span>
                 Relaciones
@@ -106,6 +120,7 @@
 
     private bool showEvaluacion;
     private bool showFundamentos;
+    private bool showCursos; // nuevo grupo de cursos y talleres
     private bool showRelaciones;
     private bool showHeridas;
     private bool showContextos;
