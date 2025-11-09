@@ -7,97 +7,96 @@
     </div>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
+<div class="@NavMenuCssClass nav-scrollable">
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Inicio
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="assessment">
-                <span class="bi bi-heart-fill" aria-hidden="true"></span> Autoevaluación
-            </NavLink>
+
+        <div class="nav-item px-3 mt-2">
+            <button class="btn btn-sm btn-outline-light w-100 text-start" @onclick="() => ToggleSection(ref showEvaluacion)">
+                <span class="bi bi-clipboard-check" aria-hidden="true"></span>
+                Evaluación y prácticas
+                <span class="float-end bi @(showEvaluacion ? "bi-chevron-up" : "bi-chevron-down")"></span>
+            </button>
+            @if (showEvaluacion)
+            {
+                <div class="ps-3 pt-2">
+                    <NavLink class="nav-link" href="assessment"><span class="bi bi-heart-fill" aria-hidden="true"></span> Autoevaluación</NavLink>
+                    <NavLink class="nav-link" href="empatia-365"><span class="bi bi-calendar-event" aria-hidden="true"></span> 365 días</NavLink>
+                    <NavLink class="nav-link" href="acciones-diarias"><span class="bi bi-journal-check" aria-hidden="true"></span> Acciones diarias</NavLink>
+                </div>
+            }
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="impacto-en-ti">
-                <span class="bi bi-info-circle" aria-hidden="true"></span> Impacto en ti
-            </NavLink>
+
+        <div class="nav-item px-3 mt-2">
+            <button class="btn btn-sm btn-outline-light w-100 text-start" @onclick="() => ToggleSection(ref showFundamentos)">
+                <span class="bi bi-brilliance" aria-hidden="true"></span>
+                Fundamentos de empatía
+                <span class="float-end bi @(showFundamentos ? "bi-chevron-up" : "bi-chevron-down")"></span>
+            </button>
+            @if (showFundamentos)
+            {
+                <div class="ps-3 pt-2">
+                    <NavLink class="nav-link" href="valorando-a-los-demas"><span class="bi bi-people" aria-hidden="true"></span> Valorar</NavLink>
+                    <NavLink class="nav-link" href="validar-a-los-demas"><span class="bi bi-hand-thumbs-up" aria-hidden="true"></span> Validar</NavLink>
+                    <NavLink class="nav-link" href="apego-empatia"><span class="bi bi-diagram-3" aria-hidden="true"></span> Apego</NavLink>
+                    <NavLink class="nav-link" href="empatia-con-pas"><span class="bi bi-ear" aria-hidden="true"></span> Empatía PAS</NavLink>
+                    <NavLink class="nav-link" href="empatia-contigo"><span class="bi bi-person-heart" aria-hidden="true"></span> Contigo</NavLink>
+                    <NavLink class="nav-link" href="empatia-hombres-mujeres"><span class="bi bi-gender-ambiguous" aria-hidden="true"></span> Hombres/Mujeres</NavLink>
+                    <NavLink class="nav-link" href="impacto-en-ti"><span class="bi bi-info-circle" aria-hidden="true"></span> Impacto en ti</NavLink>
+                </div>
+            }
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="empatia-365">
-                <span class="bi bi-calendar-event" aria-hidden="true"></span> 365 días
-            </NavLink>
+
+        <div class="nav-item px-3 mt-2">
+            <button class="btn btn-sm btn-outline-light w-100 text-start" @onclick="() => ToggleSection(ref showRelaciones)">
+                <span class="bi bi-heart" aria-hidden="true"></span>
+                Relaciones
+                <span class="float-end bi @(showRelaciones ? "bi-chevron-up" : "bi-chevron-down")"></span>
+            </button>
+            @if (showRelaciones)
+            {
+                <div class="ps-3 pt-2">
+                    <NavLink class="nav-link" href="amar-responsablemente"><span class="bi bi-heart" aria-hidden="true"></span> Amar Resp.</NavLink>
+                    <NavLink class="nav-link" href="empatia-al-buscar-pareja"><span class="bi bi-search-heart" aria-hidden="true"></span> Pareja</NavLink>
+                    <NavLink class="nav-link" href="perdon-autentico"><span class="bi bi-shield-check" aria-hidden="true"></span> Perdón</NavLink>
+                </div>
+            }
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="valorando-a-los-demas">
-                <span class="bi bi-people" aria-hidden="true"></span> Valorar
-            </NavLink>
+
+        <div class="nav-item px-3 mt-2">
+            <button class="btn btn-sm btn-outline-light w-100 text-start" @onclick="() => ToggleSection(ref showHeridas)">
+                <span class="bi bi-activity" aria-hidden="true"></span>
+                Heridas y reparación
+                <span class="float-end bi @(showHeridas ? "bi-chevron-up" : "bi-chevron-down")"></span>
+            </button>
+            @if (showHeridas)
+            {
+                <div class="ps-3 pt-2">
+                    <NavLink class="nav-link" href="heridas-emocionales"><span class="bi bi-activity" aria-hidden="true"></span> Heridas emocionales</NavLink>
+                    <NavLink class="nav-link" href="rechazar-a-los-demas-es-rechazarnos"><span class="bi bi-slash-circle" aria-hidden="true"></span> Rechazar es rechazarnos</NavLink>
+                </div>
+            }
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="apego-empatia">
-                <span class="bi bi-diagram-3" aria-hidden="true"></span> Apego
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="empatia-con-pas">
-                <span class="bi bi-ear" aria-hidden="true"></span> Empatía PAS
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="empatia-contigo">
-                <span class="bi bi-person-heart" aria-hidden="true"></span> Contigo
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="acciones-diarias">
-                <span class="bi bi-journal-check" aria-hidden="true"></span> Diario
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="empatia-hombres-mujeres">
-                <span class="bi bi-gender-ambiguous" aria-hidden="true"></span> Hombres/Mujeres
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="validar-a-los-demas">
-                <span class="bi bi-hand-thumbs-up" aria-hidden="true"></span> Validar
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="amar-responsablemente">
-                <span class="bi bi-heart" aria-hidden="true"></span> Amar Resp.
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="perdon-autentico">
-                <span class="bi bi-shield-check" aria-hidden="true"></span> Perdón
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="empatia-al-buscar-pareja">
-                <span class="bi bi-search-heart" aria-hidden="true"></span> Pareja
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="madres-solteras">
-                <span class="bi bi-people-fill" aria-hidden="true"></span> Madres solteras
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="padres-solteros">
-                <span class="bi bi-person-badge" aria-hidden="true"></span> Padres solteros
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="personas-divorciadas">
-                <span class="bi bi-slash-square" aria-hidden="true"></span> Personas divorciadas
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="personas-viudas">
-                <span class="bi bi-heartbreak" aria-hidden="true"></span> Personas viudas
-            </NavLink>
+
+        <div class="nav-item px-3 mt-2 mb-3">
+            <button class="btn btn-sm btn-outline-light w-100 text-start" @onclick="() => ToggleSection(ref showContextos)">
+                <span class="bi bi-people-fill" aria-hidden="true"></span>
+                Contextos de vida
+                <span class="float-end bi @(showContextos ? "bi-chevron-up" : "bi-chevron-down")"></span>
+            </button>
+            @if (showContextos)
+            {
+                <div class="ps-3 pt-2">
+                    <NavLink class="nav-link" href="madres-solteras"><span class="bi bi-people-fill" aria-hidden="true"></span> Madres solteras</NavLink>
+                    <NavLink class="nav-link" href="padres-solteros"><span class="bi bi-person-badge" aria-hidden="true"></span> Padres solteros</NavLink>
+                    <NavLink class="nav-link" href="personas-divorciadas"><span class="bi bi-slash-square" aria-hidden="true"></span> Personas divorciadas</NavLink>
+                    <NavLink class="nav-link" href="personas-viudas"><span class="bi bi-heartbreak" aria-hidden="true"></span> Personas viudas</NavLink>
+                </div>
+            }
         </div>
     </nav>
 </div>
@@ -105,10 +104,21 @@
 @code {
     private bool collapseNavMenu = true;
 
+    private bool showEvaluacion;
+    private bool showFundamentos;
+    private bool showRelaciones;
+    private bool showHeridas;
+    private bool showContextos;
+
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void ToggleSection(ref bool sectionFlag)
+    {
+        sectionFlag = !sectionFlag;
     }
 }

@@ -1,0 +1,158 @@
+@page "/rechazar-a-los-demas-es-rechazarnos"
+@using BlazorApp.Shared.EmpathyAssessment
+
+<PageTitle>Rechazar a los demás es rechazarnos</PageTitle>
+
+<h2>Rechazar a las demás personas es rechazarnos a nosotros mismos</h2>
+<p class="text-muted">Guía educativa para comprender por qué los gestos de rechazo hacia otros también erosionan nuestra propia identidad, paz y capacidad de amar.</p>
+
+<BibleVerseByRef Reference="Mateo 22:37-39" FallbackTag="amor" />
+<RejectionBackfires />
+
+<div class="alert alert-warning small">
+    Cada acto de rechazo comunica “tu existencia no me afecta”. Esa mirada, repetida, también moldea cómo nos miramos a nosotros mismos: reduce nuestra humanidad compartida, empobrece la empatía y nos aísla.
+</div>
+
+@code {
+    private EmotionalWound? rechazo;
+
+    protected override void OnInitialized()
+    {
+        rechazo = EmotionalWoundData.GetById("rechazo");
+    }
+}
+
+<h3>1) ¿Qué comunica el rechazo?</h3>
+<ul>
+    <li>Desvalor: “No mereces mi tiempo/escucha”.</li>
+    <li>Deshumanización: veo funciones, no personas (historia, emociones, potencial).</li>
+    <li>Ceguera relacional: cierro puertas a aprender y ser transformado por el otro.</li>
+</ul>
+
+<BibleVerseByRef Reference="Lucas 6:31" FallbackTag="reciprocidad" />
+
+<h3>2) Impacto en ti cuando rechazas</h3>
+<ul>
+    <li>Empobrecimiento interno: entrenas la indiferencia y pierdes sensibilidad.</li>
+    <li>Aislamiento: otros perciben frialdad y se retiran; crece soledad auto‑infligida.</li>
+    <li>Narrativa de insuficiencia: lo que niegas a otros terminas creyendo que tampoco lo mereces.</li>
+    <li>Reactividad: aumenta la probabilidad de interpretar desacuerdos como ataques.</li>
+</ul>
+
+<h3>3) Señales y patrones vinculados a la herida de rechazo</h3>
+@if (rechazo is not null)
+{
+    <div class="row g-3">
+        <div class="col-12 col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Señales de activación</h5>
+                    <ul>
+                        @foreach (var s in rechazo.ActivationSignals)
+                        {
+                            <li>@s</li>
+                        }
+                    </ul>
+                    <h5 class="card-title mt-3">Patrones defensivos</h5>
+                    <ul>
+                        @foreach (var p in rechazo.DefensivePatterns)
+                        {
+                            <li>@p</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Preguntas de reflexión</h5>
+                    <ul>
+                        @foreach (var q in rechazo.ReflectionQuestions)
+                        {
+                            <li>@q</li>
+                        }
+                    </ul>
+                    <div class="small text-muted">Usa estas preguntas antes de responder con frialdad o exclusión.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-secondary small">Contenido de referencia no disponible en este momento.</div>
+}
+
+<h3 class="mt-3">4) Frases y acciones para invertir el rechazo</h3>
+@if (rechazo is not null)
+{
+    <div class="row g-3">
+        <div class="col-12 col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Frases empáticas</h5>
+                    <ul>
+                        @foreach (var sp in rechazo.SupportPhrases)
+                        {
+                            <li>@sp</li>
+                        }
+                    </ul>
+                    <h5 class="card-title mt-3">Micro‑prácticas (30–120s)</h5>
+                    <ul>
+                        @foreach (var m in rechazo.MicroPractices)
+                        {
+                            <li>@m</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Acciones empáticas</h5>
+                    <ul>
+                        @foreach (var a in rechazo.EmpathicSupportActions)
+                        {
+                            <li>@a</li>
+                        }
+                    </ul>
+                    <div class="small text-muted">Pequeñas inclusiones repetidas transforman climas y narrativas.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<h3 class="mt-3">5) Errores a evitar</h3>
+@if (rechazo is not null)
+{
+    <ul>
+        @foreach (var e in rechazo.MistakesToAvoid)
+        {
+            <li>@e</li>
+        }
+    </ul>
+}
+
+<h3 class="mt-3">6) Plan de 7 días para entrenar inclusión</h3>
+<ol class="small">
+    <li>Saluda por nombre y formula 2 preguntas genuinas a alguien nuevo.</li>
+    <li>Incluye a quien está en la periferia de tu grupo (literalmente haz espacio).</li>
+    <li>Envía un mensaje breve de “aquí estoy” a alguien que sueles ignorar.</li>
+    <li>Reconoce en voz alta un aporte invisible de otra persona.</li>
+    <li>Evita una comparación/descalificación y reemplázala por validación.</li>
+    <li>Escucha 2 minutos sin interrumpir y refleja lo que entendiste.</li>
+    <li>Revisa tu semana: ¿Dónde todavía excluyes? Define una micro‑corrección.</li>
+</ol>
+
+<BibleVerseByRef Reference="1 Juan 3:16-18" FallbackTag="acciones" />
+
+<h3 class="mt-3">7) Ver más</h3>
+<ul>
+    <li><NavLink href="/heridas-emocionales/rechazo">Herida de Rechazo</NavLink> — cómo detectar activación y acompañar con empatía.</li>
+    <li><NavLink href="/validar-a-los-demas">Validar a los demás</NavLink> — frases y acciones para afirmar dignidad.</li>
+</ul>
+
+<p class="small text-muted mt-4">Practicar inclusión afirma tu propia humanidad: al honrar el valor del otro, recuerdas y fortaleces el tuyo.</p>
