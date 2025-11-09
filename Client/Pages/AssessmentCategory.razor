@@ -8,6 +8,8 @@
     private Dictionary<string, bool?> answers = new Dictionary<string, bool?>();
     private bool showResults;
 
+    private SuggestionBundle? suggestions;
+
     protected override void OnParametersSet()
     {
         if (string.IsNullOrEmpty(CategoryId))
@@ -25,13 +27,24 @@
                 answers[q.Text] = null; // unanswered
             }
         }
+        suggestions = null;
     }
 
     private int TotalAnswered => answers.Values.Count(v => v.HasValue);
     private int TotalYes => answers.Values.Count(v => v == true);
     private void Toggle(string text, bool value) => answers[text] = value;
-    private void ShowResults() => showResults = true;
-    private void Reset() { showResults = false; foreach (var k in new List<string>(answers.Keys)) answers[k] = null; }
+    private void ShowResults()
+    {
+        showResults = true;
+        BuildSuggestions();
+    }
+    private void Reset() { showResults = false; foreach (var k in new List<string>(answers.Keys)) answers[k] = null; suggestions = null; }
+
+    private void BuildSuggestions()
+    {
+        var affirmed = answers.Where(kv => kv.Value == true).Select(kv => kv.Key).ToList();
+        suggestions = EmpathySuggestionEngine.BuildSuggestions(affirmed);
+    }
 
     private string GetVerseForQuestion(EmpathyQuestion q, string? categoryId)
     {
@@ -156,6 +169,71 @@ else
                     </div>
                 }
             </div>
+
+            @if (suggestions is not null)
+            {
+                <div class="mt-4">
+                    <h5>Sugerencias empáticas según patrones observados</h5>
+                    <div class="small text-muted">Generadas a partir de posibles heridas relacionadas a los comportamientos marcados como "Sí".</div>
+                    <div class="row g-3 mt-1">
+                        <div class="col-12 col-lg-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">Frases empáticas</h6>
+                                    <ul>
+                                        @foreach (var p in suggestions.Phrases)
+                                        {
+                                            <li>@p</li>
+                                        }
+                                    </ul>
+                                    <h6 class="card-title mt-3">Micro-prácticas (30–120s)</h6>
+                                    <ul>
+                                        @foreach (var m in suggestions.MicroPractices)
+                                        {
+                                            <li>@m</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">Acciones empáticas de apoyo</h6>
+                                    <ul>
+                                        @foreach (var a in suggestions.SupportActions)
+                                        {
+                                            <li>@a</li>
+                                        }
+                                    </ul>
+                                    <h6 class="card-title mt-3 text-danger">Errores a evitar</h6>
+                                    <ul>
+                                        @foreach (var e in suggestions.MistakesToAvoid)
+                                        {
+                                            <li>@e</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">Prácticas de reparación que puedes facilitar</h6>
+                                    <ul>
+                                        @foreach (var r in suggestions.RepairPractices)
+                                        {
+                                            <li>@r</li>
+                                        }
+                                    </ul>
+                                    <div class="small text-muted">Usa estas prácticas con permiso y sensibilidad. Cada persona es única.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
             <p class="mt-3">Para crecer en empatía, trabaja diariamente en las siguientes prácticas recomendadas:</p>
             <ul>
                 @foreach (var p in category.DailyPractices)

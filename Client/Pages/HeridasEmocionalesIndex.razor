@@ -1,0 +1,25 @@
+@page "/heridas-emocionales"
+@using BlazorApp.Shared.EmpathyAssessment
+
+<PageTitle>Heridas emocionales</PageTitle>
+
+<h2>Heridas emocionales y empatía hacia otros</h2>
+<p class="text-muted">Objetivo: aprender a acompañar empáticamente a otras personas según la herida que pueda activarse en ellas. Observa señales y usa acciones de apoyo que favorezcan inclusión, seguridad, confianza, dignidad y justicia percibida. No diagnostiques; usa la información para cuidar mejor.</p>
+<div class="alert alert-info small">Las guías describen posibles señales y formas de responder. Cada persona es única: pregunta siempre con respeto antes de asumir.</div>
+
+<div class="row">
+    @foreach (var w in EmotionalWoundData.Wounds)
+    {
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@w.Name</h5>
+                    <p class="card-text small">@w.CoreDescription</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-3 pt-0">
+                    <a class="btn btn-outline-primary btn-sm" href="heridas-emocionales/@w.Id">Ver guía</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,126 @@
+@page "/heridas-emocionales/{Id}"
+@using BlazorApp.Shared.EmpathyAssessment
+
+@code {
+    [Parameter] public string? Id { get; set; }
+    private EmotionalWound? wound;
+
+    protected override void OnParametersSet()
+    {
+        wound = !string.IsNullOrWhiteSpace(Id) ? EmotionalWoundData.GetById(Id) : null;
+    }
+}
+
+<PageTitle>@(wound?.Name ?? "Heridas emocionales")</PageTitle>
+
+@if (wound is null)
+{
+    <h3>Herida no encontrada</h3>
+    <p>Verifica el enlace o vuelve al listado.</p>
+    <NavLink href="/heridas-emocionales" class="btn btn-outline-secondary btn-sm">Volver</NavLink>
+}
+else
+{
+    <div class="d-flex align-items-center mb-2">
+        <h2 class="mb-0">@wound.Name</h2>
+        <NavLink href="/heridas-emocionales" class="btn btn-link btn-sm ms-2">Listado</NavLink>
+    </div>
+    <p class="text-muted">@wound.CoreDescription</p>
+    <div class="alert alert-warning small">Objetivo: acompañar con empatía a la persona. No etiquetar ni diagnosticar; preguntar y validar su experiencia.</div>
+
+    <div class="row g-3">
+        <div class="col-12 col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Señales observables / posibles activaciones</h5>
+                    <ul>
+                        @foreach (var s in wound.ActivationSignals)
+                        {
+                            <li>@s</li>
+                        }
+                    </ul>
+                    <h5 class="card-title mt-3">Patrones defensivos frecuentes</h5>
+                    <ul>
+                        @foreach (var p in wound.DefensivePatterns)
+                        {
+                            <li>@p</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Distorsiones relacionales (creencias posibles)</h5>
+                    <ul>
+                        @foreach (var d in wound.RelationalDistortions)
+                        {
+                            <li>@d</li>
+                        }
+                    </ul>
+                    <h5 class="card-title mt-3">Preguntas internas de acompañamiento</h5>
+                    <ul>
+                        @foreach (var q in wound.ReflectionQuestions)
+                        {
+                            <li>@q</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Frases empáticas sugeridas</h5>
+                    <ul>
+                        @foreach (var phrase in wound.SupportPhrases)
+                        {
+                            <li>@phrase</li>
+                        }
+                    </ul>
+                    <h5 class="card-title mt-3">Acciones empáticas de apoyo</h5>
+                    <ul>
+                        @foreach (var a in wound.EmpathicSupportActions)
+                        {
+                            <li>@a</li>
+                        }
+                    </ul>
+                    <h5 class="card-title mt-3">Micro-prácticas inmediatas (30–120s)</h5>
+                    <ul>
+                        @foreach (var m in wound.MicroPractices)
+                        {
+                            <li>@m</li>
+                        }
+                    </ul>
+                    <div class="small text-muted">Aplica solo acciones respetuosas y proporcionales. Ofrece, no impongas.</div>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title text-danger">Errores a evitar</h5>
+                    <ul>
+                        @foreach (var e in wound.MistakesToAvoid)
+                        {
+                            <li>@e</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Prácticas de reparación que puedes facilitar</h5>
+                    <ul>
+                        @foreach (var r in wound.RepairPractices)
+                        {
+                            <li>@r</li>
+                        }
+                    </ul>
+                    <div class="alert alert-info mt-2">
+                        Consejo: valida primero la emoción antes de sugerir una práctica. Pregunta: "¿Te ayudaría X?".
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
