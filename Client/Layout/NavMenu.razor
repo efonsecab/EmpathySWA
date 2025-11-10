@@ -10,9 +10,16 @@
 <div class="@NavMenuCssClass nav-scrollable">
     <nav class="flex-column">
         <div class="nav-item px-3">
-            <NavLink class="nav-link d-flex align-items-center flex-wrap" href="" Match="NavLinkMatch.All">
+            <NavLink class="nav-link d-flex align-items-center" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu me-2" aria-hidden="true"></span>
-                <span class="flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Inicio</span>
+                <span style="white-space:normal">Inicio</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link d-flex align-items-center" href="libros">
+                <span class="bi bi-journal-bookmark me-2" aria-hidden="true"></span>
+                <span style="white-space:normal">Libros</span>
             </NavLink>
         </div>
 
@@ -111,8 +118,8 @@
             @if (showHeridas)
             {
                 <div class="ps-3 pt-2">
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="heridas-emocionales"><span class="bi bi-activity" aria-hidden="true"></span><TruncatedText Text="Heridas emocionales" MaxLength="16" /></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="rechazar-a-los-demas-es-rechazarnos"><span class="bi bi-slash-circle" aria-hidden="true"></span><TruncatedText Text="Rechazar es rechazarnos" MaxLength="16" /></NavLink>
+                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="heridas-emocionales"><span class="bi bi-activity" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Heridas emocionales</span></NavLink>
+                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="rechazar-a-los-demas-es-rechazarnos"><span class="bi bi-slash-circle" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Rechazar es rechazarnos</span></NavLink>
                 </div>
             }
         </div>
