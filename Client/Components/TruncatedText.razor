@@ -1,0 +1,19 @@
+@* Componente reutilizable para mostrar texto truncado con tooltip que contiene el texto completo. *@
+@using Microsoft.AspNetCore.Components
+
+<span class="truncated-text ms-2 flex-grow-1" title="@Text" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">@DisplayText</span>
+
+@code {
+    /// <summary>
+    /// Texto completo a mostrar (tooltip).
+    /// </summary>
+    [Parameter] public string Text { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Longitud máxima del texto a mostrar antes de truncarlo. Valor por defecto: 16.
+    /// </summary>
+    [Parameter] public int MaxLength { get; set; } = 16;
+
+    private string DisplayText =>
+        string.IsNullOrEmpty(Text) ? string.Empty : (Text.Length > MaxLength ? Text.Substring(0, MaxLength - 1) + "…" : Text);
+}
