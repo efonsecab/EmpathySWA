@@ -1,0 +1,151 @@
+@using System.Text.Json
+@inject IJSRuntime JS
+
+<div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <div>
+            <strong>Desafío: 25 Días de Actos de Amor</strong>
+            <div class="small text-muted">Marca cada día que completes. Los avances se guardan en tu navegador.</div>
+        </div>
+        <div>
+            <button class="btn btn-sm btn-outline-secondary me-1" @onclick="ResetAsync">Reiniciar</button>
+            <button class="btn btn-sm btn-outline-primary" @onclick="ExportAsync">Exportar progreso</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="mb-2">
+            <div class="progress" style="height:16px">
+                <div class="progress-bar" role="progressbar" style="width:@Progress%" aria-valuenow="@CompletedCount" aria-valuemin="0" aria-valuemax="25">@Progress%</div>
+            </div>
+            <div class="small text-muted mt-1">Completados: @CompletedCount / @DaysCount</div>
+        </div>
+
+        <ol class="list-group list-group-numbered">
+            @for (int i = 0; i < DaysCount; i++)
+            {
+                @* Capture loop index to avoid closure bug when creating event handlers *@
+                var idx = i;
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Día @((idx+1))</div>
+                        <div class="small">@days[idx]</div>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="dayCheck_@idx" checked="@completed[idx]" @onchange="() => ToggleDay(idx)" />
+                        <label class="form-check-label small" for="dayCheck_@idx">Hecho</label>
+                    </div>
+                </li>
+            }
+        </ol>
+
+        @if (!string.IsNullOrEmpty(exportJson))
+        {
+            <div class="mt-3">
+                <label class="form-label small">Progreso exportado (JSON)</label>
+                <textarea class="form-control" rows="4" readonly>@exportJson</textarea>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private const string StorageKey = "ActsOfLoveChallenge_v1";
+    private readonly string[] days = new string[] {
+        "Ir a la cafetería más cercana y pagarle el café a alguna persona.",
+        "Invitar a una persona sin hogar a comer contigo.",
+        "Cocinar galletas para algún vecino.",
+        "Ceder tu campo en la fila. (Banco, centro comercial, etc.).",
+        "Darle un halago a alguien (en persona).",
+        "Regalar flores a alguna amistad.",
+        "Escribir y regalar una carta describiendo las mejores cualidades que esa persona tiene.",
+        "Donar regalos a un orfanato.",
+        "Donar ropa a las personas sin hogar.",
+        "Donar comida a la cruz roja.",
+        "Hablarle a algún adulto mayor en el parque.",
+        "Llevar a alguien a pasear.",
+        "Regalar un libro a alguna amistad.",
+        "Regalar una flor a alguna persona desconocida.",
+        "Ayudar a un adulto mayor a cruzar la calle.",
+        "Regalar chocolates a alguna amistad.",
+        "Llamar a alguna amistad y preguntarle si hay algo en lo que le puedas ayudar.",
+        "Ser voluntario en una causa de ayuda social (se puede buscar en la iglesia o comunidad).",
+        "Escribir mensajes motivacionales a alguna amistad.",
+        "Mostrarte vulnerable con alguna amistad (abrirse al hablar).",
+        "Busca basura en la calle y llévala a un basurero o a reciclar si es algo reciclable.",
+        "Donar algo nuevo sin estrenar a una causa de ayuda social (tennis, zapatos, etc.).",
+        "Ayudar a alguien con las bolsas/cajas del supermercado.",
+        "Regalar las cosas que no usas ni necesitas.",
+        "Pasa unas horas compartiendo con alguna persona sin hogar, búscale, siéntate a su lado y conversen."
+    };
+
+    private int DaysCount => days.Length;
+    private bool[] completed = Array.Empty<bool>();
+    private string? exportJson;
+
+    protected override async Task OnInitializedAsync()
+    {
+        completed = new bool[DaysCount];
+        await LoadAsync();
+    }
+
+    private int CompletedCount => completed.Count(c => c);
+    private string Progress => ((int)((CompletedCount / (double)DaysCount) * 100)).ToString() + "%";
+
+    private async Task ToggleDay(int index)
+    {
+        if (index < 0 || index >= completed.Length) return; // guard
+        completed[index] = !completed[index];
+        await SaveAsync();
+        StateHasChanged();
+    }
+
+    private async Task SaveAsync()
+    {
+        try
+        {
+            var json = JsonSerializer.Serialize(completed);
+            await JS.InvokeVoidAsync("localStorage.setItem", StorageKey, json);
+        }
+        catch { /* no-op */ }
+    }
+
+    private async Task LoadAsync()
+    {
+        try
+        {
+            var json = await JS.InvokeAsync<string?>("localStorage.getItem", StorageKey);
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                var arr = JsonSerializer.Deserialize<bool[]>(json);
+                if (arr != null && arr.Length == DaysCount)
+                {
+                    completed = arr;
+                    return;
+                }
+            }
+        }
+        catch { /* no-op */ }
+        // default (already initialized)
+    }
+
+    private async Task ResetAsync()
+    {
+        completed = new bool[DaysCount];
+        await SaveAsync();
+        exportJson = null;
+    }
+
+    private async Task ExportAsync()
+    {
+        try
+        {
+            exportJson = JsonSerializer.Serialize(new { Date = DateTime.UtcNow, Progress = completed });
+            // also copy to clipboard if available
+            await JS.InvokeVoidAsync("navigator.clipboard.writeText", exportJson);
+        }
+        catch
+        {
+            // ignore clipboard errors
+        }
+    }
+}

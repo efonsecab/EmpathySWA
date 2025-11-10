@@ -1,0 +1,18 @@
+@* Componente pequeño para mostrar un extracto de libro y enlace a la página completa *@
+@inherits Microsoft.AspNetCore.Components.ComponentBase
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">@Title</h5>
+        <p class="small text-muted">@Subtitle</p>
+        <p class="card-text">@((MarkupString)Excerpt)</p>
+        <a class="btn btn-sm btn-outline-primary" href="@Link">Leer capítulo completo</a>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Subtitle { get; set; } = "";
+    [Parameter] public string Excerpt { get; set; } = "";
+    [Parameter] public string Link { get; set; } = "/";
+}
