@@ -8,165 +8,80 @@
 </div>
 
 <div class="@NavMenuCssClass nav-scrollable">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
+    <nav class="flex-column px-2 py-2">
+        <div class="nav-item mb-2">
             <NavLink class="nav-link d-flex align-items-center" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu me-2" aria-hidden="true"></span>
-                <span style="white-space:normal">Inicio</span>
+                <span class="bi bi-house-door-fill me-2" aria-hidden="true"></span>
+                <span>Inicio</span>
             </NavLink>
         </div>
 
-        <div class="nav-item px-3">
+        <div class="nav-item mb-2">
             <NavLink class="nav-link d-flex align-items-center" href="libros">
                 <span class="bi bi-journal-bookmark me-2" aria-hidden="true"></span>
-                <span style="white-space:normal">Libros</span>
+                <span>Libros</span>
             </NavLink>
         </div>
 
-        <div class="nav-item px-3 mt-2">
-            <button class="btn btn-sm btn-outline-light w-100 text-start p-0" @onclick="() => ToggleSection(ref showEvaluacion)">
-                <div class="d-flex justify-content-between align-items-center w-100 px-2 py-1">
-                    <div class="d-flex align-items-center">
-                        <span class="bi bi-clipboard-check me-2" aria-hidden="true"></span>
-                        <span style="white-space:normal">Evaluación y prácticas</span>
-                    </div>
-                    <span class="bi @(showEvaluacion ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
-                </div>
-            </button>
-            @if (showEvaluacion)
-            {
-                <div class="ps-3 pt-2">
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="assessment"><span class="bi bi-heart-fill" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Autoevaluación</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="empatia-365"><span class="bi bi-calendar-event" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">365 días</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="acciones-diarias"><span class="bi bi-journal-check" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Acciones diarias</span></NavLink>
-                </div>
-            }
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link d-flex align-items-center" href="categoria-evaluacion">
+                <span class="bi bi-clipboard-check me-2" aria-hidden="true"></span>
+                <span>Evaluación y prácticas</span>
+            </NavLink>
         </div>
 
-        <div class="nav-item px-3 mt-2">
-            <button class="btn btn-sm btn-outline-light w-100 text-start p-0" @onclick="() => ToggleSection(ref showFundamentos)">
-                <div class="d-flex justify-content-between align-items-center w-100 px-2 py-1">
-                    <div class="d-flex align-items-center">
-                        <span class="bi bi-brilliance me-2" aria-hidden="true"></span>
-                        <span style="white-space:normal">Fundamentos de empatía</span>
-                    </div>
-                    <span class="bi @(showFundamentos ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
-                </div>
-            </button>
-            @if (showFundamentos)
-            {
-                <div class="ps-3 pt-2">
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="valorando-a-los-demas"><span class="bi bi-people" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Valorar</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="validar-a-los-demas"><span class="bi bi-hand-thumbs-up" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Validar</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="apego-empatia"><span class="bi bi-diagram-3" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Apego</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="empatia-con-pas"><span class="bi bi-ear" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Empatía PAS</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="empatia-contigo"><span class="bi bi-person-heart" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Contigo</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="empatia-hombres-mujeres"><span class="bi bi-gender-ambiguous" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Hombres/Mujeres</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="impacto-en-ti"><span class="bi bi-info-circle" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Impacto en ti</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="mitos-y-estereotipos"><span class="bi bi-exclamation-triangle-fill text-warning" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Mitos y estereotipos</span></NavLink>
-                </div>
-            }
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link d-flex align-items-center" href="categoria-fundamentos">
+                <span class="bi bi-brilliance me-2" aria-hidden="true"></span>
+                <span>Fundamentos</span>
+            </NavLink>
         </div>
 
-        <div class="nav-item px-3 mt-2">
-            <button class="btn btn-sm btn-outline-light w-100 text-start p-0" @onclick="() => ToggleSection(ref showCursos)">
-                <div class="d-flex justify-content-between align-items-center w-100 px-2 py-1">
-                    <div class="d-flex align-items-center">
-                        <span class="bi bi-book me-2" aria-hidden="true"></span>
-                        <span style="white-space:normal">Cursos y Talleres</span>
-                    </div>
-                    <span class="bi @(showCursos ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
-                </div>
-            </button>
-            @if (showCursos)
-            {
-                <div class="ps-3 pt-2">
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="curso-amar-al-projimo"><span class="bi bi-journal-richtext" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Amar al prójimo</span></NavLink>
-                </div>
-            }
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link d-flex align-items-center" href="categoria-cursos">
+                <span class="bi bi-book me-2" aria-hidden="true"></span>
+                <span>Cursos y Talleres</span>
+            </NavLink>
         </div>
 
-        <div class="nav-item px-3 mt-2">
-            <button class="btn btn-sm btn-outline-light w-100 text-start p-0" @onclick="() => ToggleSection(ref showRelaciones)">
-                <div class="d-flex justify-content-between align-items-center w-100 px-2 py-1">
-                    <div class="d-flex align-items-center">
-                        <span class="bi bi-heart me-2" aria-hidden="true"></span>
-                        <span style="white-space:normal">Relaciones</span>
-                    </div>
-                    <span class="bi @(showRelaciones ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
-                </div>
-            </button>
-            @if (showRelaciones)
-            {
-                <div class="ps-3 pt-2">
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="amar-responsablemente"><span class="bi bi-heart" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Amar Resp.</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="empatia-al-buscar-pareja"><span class="bi bi-search-heart" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Pareja</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="perdon-autentico"><span class="bi bi-shield-check" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Perdón</span></NavLink>
-                </div>
-            }
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link d-flex align-items-center" href="categoria-relaciones">
+                <span class="bi bi-heart me-2" aria-hidden="true"></span>
+                <span>Relaciones</span>
+            </NavLink>
         </div>
 
-        <div class="nav-item px-3 mt-2">
-            <button class="btn btn-sm btn-outline-light w-100 text-start p-0" @onclick="() => ToggleSection(ref showHeridas)">
-                <div class="d-flex justify-content-between align-items-center w-100 px-2 py-1">
-                    <div class="d-flex align-items-center">
-                        <span class="bi bi-activity me-2" aria-hidden="true"></span>
-                        <span style="white-space:normal">Heridas y reparación</span>
-                    </div>
-                    <span class="bi @(showHeridas ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
-                </div>
-            </button>
-            @if (showHeridas)
-            {
-                <div class="ps-3 pt-2">
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="heridas-emocionales"><span class="bi bi-activity" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Heridas emocionales</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="rechazar-a-los-demas-es-rechazarnos"><span class="bi bi-slash-circle" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Rechazar es rechazarnos</span></NavLink>
-                </div>
-            }
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link d-flex align-items-center" href="categoria-heridas">
+                <span class="bi bi-activity me-2" aria-hidden="true"></span>
+                <span>Heridas y reparación</span>
+            </NavLink>
         </div>
 
-        <div class="nav-item px-3 mt-2 mb-3">
-            <button class="btn btn-sm btn-outline-light w-100 text-start p-0" @onclick="() => ToggleSection(ref showContextos)">
-                <div class="d-flex justify-content-between align-items-center w-100 px-2 py-1">
-                    <div class="d-flex align-items-center">
-                        <span class="bi bi-people-fill me-2" aria-hidden="true"></span>
-                        <span style="white-space:normal">Contextos de vida</span>
-                    </div>
-                    <span class="bi @(showContextos ? "bi-chevron-up" : "bi-chevron-down")" aria-hidden="true"></span>
-                </div>
-            </button>
-            @if (showContextos)
-            {
-                <div class="ps-3 pt-2">
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="madres-solteras"><span class="bi bi-people-fill" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Madres solteras</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="padres-solteros"><span class="bi bi-person-badge" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Padres solteros</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="personas-divorciadas"><span class="bi bi-slash-square" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Personas divorciadas</span></NavLink>
-                    <NavLink class="nav-link d-flex align-items-center flex-wrap" href="personas-viudas"><span class="bi bi-heartbreak" aria-hidden="true"></span><span class="ms-2 flex-grow-1" style="white-space:normal; overflow-wrap:break-word; word-break:break-word; min-width:0;">Personas viudas</span></NavLink>
-                </div>
-            }
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link d-flex align-items-center" href="categoria-contextos">
+                <span class="bi bi-people-fill me-2" aria-hidden="true"></span>
+                <span>Contextos de vida</span>
+            </NavLink>
         </div>
+
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link d-flex align-items-center" href="explorar">
+                <span class="bi bi-grid-3x3-gap me-2" aria-hidden="true"></span>
+                <span>Explorar</span>
+            </NavLink>
+        </div>
+
     </nav>
 </div>
 
 @code {
     private bool collapseNavMenu = true;
 
-    private bool showEvaluacion;
-    private bool showFundamentos;
-    private bool showCursos; // nuevo grupo de cursos y talleres
-    private bool showRelaciones;
-    private bool showHeridas;
-    private bool showContextos;
-
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
-    }
-
-    private void ToggleSection(ref bool sectionFlag)
-    {
-        sectionFlag = !sectionFlag;
     }
 }

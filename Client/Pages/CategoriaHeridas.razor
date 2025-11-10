@@ -1,0 +1,35 @@
+@page "/categoria-heridas"
+
+<PageTitle>Heridas y reparación</PageTitle>
+
+<h1>Heridas y reparación</h1>
+<p class="small text-muted">Materiales para reconocer heridas emocionales y rutas de reparación.</p>
+
+<style>.card-visual { border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.08); transition:transform .15s ease, box-shadow .15s ease; } .card-visual:hover { transform: translateY(-6px); box-shadow:0 12px 28px rgba(0,0,0,0.12); }</style>
+
+<div class="row row-cols-1 row-cols-md-2 g-3">
+    <div class="col">
+        <div class="card h-100 card-visual">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Heridas emocionales</h5>
+                <p class="card-text small">Señales y prácticas para acompañar con respeto.</p>
+                <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <NavLink class="btn btn-outline-primary btn-sm" href="heridas-emocionales">Abrir</NavLink>
+                    <a class="btn btn-sm btn-link" href="heridas-emocionales">Más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 card-visual">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Rechazar es rechazarnos</h5>
+                <p class="card-text small">Cómo el rechazo hiere y qué hacer para repararlo.</p>
+                <div class="mt-auto d-flex justify-content-between align-items-center">
+                    <NavLink class="btn btn-outline-primary btn-sm" href="rechazar-a-los-demas-es-rechazarnos">Abrir</NavLink>
+                    <a class="btn btn-sm btn-link" href="rechazar-a-los-demas-es-rechazarnos">Más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
