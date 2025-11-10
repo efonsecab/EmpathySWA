@@ -7,6 +7,8 @@
 <h1>Curso: Cómo amar al prójimo</h1>
 <p class="text-muted">Propuesta completa de curso/taller práctico para educar en empatía y amor al prójimo, integrando tu contenido original más la estructuración semanal.</p>
 
+<EmpathyLifeNotice />
+
 <BookExcerpt Title="El Poder del Amor" Subtitle="La Bendición de un Corazón Cristiano" Excerpt="<strong>Introducción:</strong> El propósito de este libro es ayudar al lector a que aprenda de qué se trata verdaderamente el amor y cómo amar a todas las personas. Incluye definiciones, atributos del amor y un desafío práctico de 25 días." Link="/el-poder-del-amor" />
 
 <h2>Problema</h2>
@@ -63,12 +65,6 @@
     <li>Pedir perdón a alguien por haberle juzgado.</li>
     <li>Escribir (anónimo opcional) veces que te juzgaron y cómo te hubiera gustado ser tratado.</li>
 </ul>
-
-<div class="mb-3">
-    <h5>Desafío recomendado del libro "El Poder del Amor"</h5>
-    <p class="small text-muted">Integra el desafío de 25 días del libro como práctica grupal o tarea para casa. Puedes usar esta herramienta para seguimiento personal.</p>
-    <ActsOfLoveChallenge />
-</div>
 
 <h2>Versículos base (selección)</h2>
 <div class="row g-2 small">
@@ -256,7 +252,7 @@
                 <li>Orgullo y primeras impresiones absolutizadas.</li>
                 <li>Inseguridades, baja autoestima, envidia, pensamiento negativo.</li>
                 <li>Falta de control emocional y estilos de crianza críticos interiorizados.</li>
-                <li>Proyección: señalamos en otros aspectos que nos incomodan de nosotros mismos.</li>
+                <li>Proyección: señalamos in otros aspectos que nos incomodan de nosotros mismos.</li>
             </ul>
             <h6>Ejercicio 1 (impacto del lenguaje)</h6>
             <ol class="small">
@@ -276,7 +272,13 @@
             <ul class="small">
                 <li>Entrevistar a 5 personas sobre momentos de sentirse maltratadas y cómo deseaban ser tratadas.</li>
                 <li>Practicar acto diario de amabilidad con desconocido.</li>
+                <li>Completar el <em>Desafío: 25 Días de Actos de Amor</em> del libro para integrar prácticas: abajo puedes seguir y marcar progreso.</li>
             </ul>
+
+            <div class="mt-3">
+                <ActsOfLoveChallenge />
+            </div>
+
             <h6>Material multimedia</h6>
             <ul class="small">
                 <li>Video: <a href="https://youtu.be/gYH0D52fXe8" target="_blank" rel="noopener noreferrer">Empatía</a></li>
@@ -637,17 +639,17 @@
             }
             else
             {
-                <div class="table-responsive">
-                    <table class="table table-sm align-middle table-bordered">
+                <div class="table-responsive" style="max-width:100%; overflow-x:auto;">
+                    <table class="table table-sm align-middle table-bordered w-100">
                         <thead class="table-light">
                             <tr>
-                                <th style="min-width:140px">Don / Sensibilidad</th>
-                                <th style="min-width:140px">Herida asociada</th>
-                                <th style="min-width:140px">Voluntariado</th>
-                                <th style="min-width:200px">Primera micro‑acción voluntariado</th>
-                                <th style="min-width:160px">Rol laboral</th>
-                                <th style="min-width:200px">Acción inicial laboral</th>
-                                <th style="min-width:160px">Indicadores (máx 2)</th>
+                                <th style="min-width:120px; white-space:normal;">Don / Sensibilidad</th>
+                                <th style="min-width:120px; white-space:normal;">Herida asociada</th>
+                                <th style="min-width:120px; white-space:normal;">Voluntariado</th>
+                                <th style="min-width:160px; white-space:normal;">Primera micro‑acción voluntariado</th>
+                                <th style="min-width:120px; white-space:normal;">Rol laboral</th>
+                                <th style="min-width:160px; white-space:normal;">Acción inicial laboral</th>
+                                <th style="min-width:120px; white-space:normal;">Indicadores (máx 2)</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -655,13 +657,13 @@
                         @for (int i = 0; i < filas.Count; i++)
                         {
                             <tr>
-                                <td><input class="form-control form-control-sm" @bind="filas[i].Don" placeholder="Ej. Escucha profunda" /></td>
-                                <td><input class="form-control form-control-sm" @bind="filas[i].HeridaAsociada" placeholder="Ej. Duelo" /></td>
-                                <td><input class="form-control form-control-sm" @bind="filas[i].Voluntariado" placeholder="Ej. Grupo de duelo" /></td>
-                                <td><input class="form-control form-control-sm" @bind="filas[i].AccionVoluntariado" placeholder="Ej. Facilitar apertura 5min" /></td>
-                                <td><input class="form-control form-control-sm" @bind="filas[i].RolLaboral" placeholder="Ej. Atención cliente" /></td>
-                                <td><input class="form-control form-control-sm" @bind="filas[i].AccionLaboral" placeholder="Ej. Implementar protocolo" /></td>
-                                <td><input class="form-control form-control-sm" @bind="filas[i].Indicadores" placeholder="Ej. NPS, recontactos" /></td>
+                                <td><input class="form-control form-control-sm w-100" @bind="filas[i].Don" placeholder="Ej. Escucha profunda" /></td>
+                                <td><input class="form-control form-control-sm w-100" @bind="filas[i].HeridaAsociada" placeholder="Ej. Duelo" /></td>
+                                <td><input class="form-control form-control-sm w-100" @bind="filas[i].Voluntariado" placeholder="Ej. Grupo de duelo" /></td>
+                                <td><input class="form-control form-control-sm w-100" @bind="filas[i].AccionVoluntariado" placeholder="Ej. Facilitar apertura 5min" /></td>
+                                <td><input class="form-control form-control-sm w-100" @bind="filas[i].RolLaboral" placeholder="Ej. Atención cliente" /></td>
+                                <td><input class="form-control form-control-sm w-100" @bind="filas[i].AccionLaboral" placeholder="Ej. Implementar protocolo" /></td>
+                                <td><input class="form-control form-control-sm w-100" @bind="filas[i].Indicadores" placeholder="Ej. NPS, recontactos" /></td>
                                 <td class="text-center">
                                     <button class="btn btn-outline-danger btn-sm" title="Eliminar" @onclick="() => EliminarFila(i)"><span class="bi bi-x"></span></button>
                                 </td>
