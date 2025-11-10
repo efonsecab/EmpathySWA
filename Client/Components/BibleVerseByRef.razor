@@ -1,32 +1,78 @@
+@using System
+@using System.Linq
 @using BlazorApp.Shared.EmpathyAssessment
 
 @code {
     [Parameter] public string Reference { get; set; } = string.Empty;
     [Parameter] public string FallbackTag { get; set; } = string.Empty;
+    [Parameter] public bool MostrarSelectorVersion { get; set; } = true;
 
-    private RenderFragment Content => builder =>
+    private string versionSeleccionada = string.Empty;
+    private BibleVerse? verse;
+    private IReadOnlyList<string> versionesDisponibles = new List<string>();
+    private string idBase = "ref";
+    private string instanceId = string.Empty; // asegura unicidad por instancia
+
+    protected override void OnInitialized()
     {
-        var verse = BibleVerseProvider.GetByReference(Reference);
-        if (verse is null)
+        // Generar un sufijo único por instancia del componente para evitar colisiones de grupos radio
+        instanceId = Guid.NewGuid().ToString("N");
+    }
+
+    protected override void OnParametersSet()
+    {
+        verse = BibleVerseProvider.GetByReference(Reference) ?? BibleVerseProvider.GetRandom(FallbackTag);
+        versionesDisponibles = ObtenerVersiones(verse);
+        if (string.IsNullOrWhiteSpace(versionSeleccionada) && versionesDisponibles.Count > 0)
         {
-            verse = BibleVerseProvider.GetRandom(FallbackTag);
+            // Preferir la versión base del versículo si está disponible; si no, tomar la primera
+            if (!string.IsNullOrWhiteSpace(verse?.Version) && versionesDisponibles.Contains(verse.Version))
+                versionSeleccionada = verse!.Version;
+            else
+                versionSeleccionada = versionesDisponibles[0];
         }
-        var badgeClass = verse.HighlightLoveNeighbor ? "badge bg-warning text-dark" : "badge bg-light text-muted";
-        int seq = 0;
-        builder.OpenElement(seq++, "div");
-        builder.AddAttribute(seq++, "class", "alert alert-light border small");
-        builder.OpenElement(seq++, "div");
-        builder.AddMarkupContent(seq++, $"<span class='badge {badgeClass}'>Versículo</span> <strong>{verse.Reference}</strong> <span class='text-muted'>({verse.Version})</span>");
-        builder.CloseElement();
-        builder.OpenElement(seq++, "div");
-        builder.AddContent(seq++, verse.Text);
-        builder.CloseElement();
-        builder.OpenElement(seq++, "div");
-        builder.AddAttribute(seq++, "class", "text-muted");
-        builder.AddContent(seq++, verse.Summary);
-        builder.CloseElement();
-        builder.CloseElement();
-    };
+        idBase = SanitizeId(verse?.Reference ?? "ref");
+    }
+
+    private static string SanitizeId(string s) => s.Replace(" ", "_").Replace(":", "_").Replace("/", "_");
+
+    private IReadOnlyList<string> ObtenerVersiones(BibleVerse v)
+        => (v.VersionTexts is { Count: > 0 }) ? v.VersionTexts.Keys.OrderBy(k => k).ToList() : new List<string> { v.Version };
+
+    private string ObtenerTextoSeleccionado()
+        => verse == null ? string.Empty : (!string.IsNullOrWhiteSpace(versionSeleccionada) && verse.VersionTexts.TryGetValue(versionSeleccionada, out var txt) ? txt : verse.Text);
+
+    private string BadgeClass => verse?.HighlightLoveNeighbor == true ? "badge bg-warning text-dark" : "badge bg-light text-muted";
 }
 
-@Content
+<div class="alert alert-light border small">
+    <div>
+        <span class="badge @BadgeClass">Versículo</span>
+        <strong>@verse?.Reference</strong>
+    </div>
+    @if (MostrarSelectorVersion && versionesDisponibles.Count > 1)
+    {
+        <div class="mt-1 mb-1">
+            <span class="text-muted small">Versión:</span>
+            @for (int i = 0; i < versionesDisponibles.Count; i++)
+            {
+                string v = versionesDisponibles[i];
+                string vid = $"vers_{idBase}_{v}_{instanceId}"; // id único por input
+                string vname = $"versRadio_{idBase}_{instanceId}"; // nombre único por grupo
+                <div class="form-check form-check-inline small">
+                    @if (versionSeleccionada == v)
+                    {
+                        <input class="form-check-input" type="radio" name="@vname" id="@vid" value="@v" checked @onchange="() => versionSeleccionada = v" />
+                    }
+                    else
+                    {
+                        <input class="form-check-input" type="radio" name="@vname" id="@vid" value="@v" @onchange="() => versionSeleccionada = v" />
+                    }
+                    <label class="form-check-label" for="@vid">@v</label>
+                </div>
+            }
+        </div>
+    }
+    <div class="fw-light">@ObtenerTextoSeleccionado()</div>
+    <div class="text-muted mt-1">@verse?.Summary</div>
+</div>

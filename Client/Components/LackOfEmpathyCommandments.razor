@@ -1,14 +1,52 @@
 @using BlazorApp.Shared.EmpathyAssessment
 
 <!-- Componente reutilizable: Explicación teológica/ética sobre implicaciones de la falta de empatía -->
-<div class="alert alert-danger small" role="note">
-    <strong>Advertencia sobre falta de empatía:</strong>
-    <p class="mb-1">Cuando se manifiesta indiferencia, desinterés, invalidación, uso utilitario de personas o postergación crónica de presencia y cuidado, no solo se afecta el bienestar ajeno: se <strong>desobedecen mandatos centrales</strong> que orientan una vida de amor.</p>
-    <ul class="mb-1">
-        <li><strong>Amar a Dios (Mateo 22:37-39):</strong> Ignorar dignidad de una persona creada por Él revela incoherencia entre adoración y práctica diaria.</li>
-        <li><strong>Amar al prójimo como a uno mismo:</strong> La falta de empatía niega cuidados básicos (escucha, atención, paciencia) que uno sí desea recibir. Es un quiebre activo del segundo mandamiento.</li>
-        <li><strong>Considerar a los demás como superiores (Filipenses 2:3-4):</strong> Actitudes egocéntricas y respuestas frías priorizan comodidad propia sobre necesidad concreta ajena; se invierte el orden de humildad enseñado.</li>
-    </ul>
-    <p class="mb-1">Persistir en patrones de no empatía forma hábitos que oscurecen sensibilidad espiritual y moral. La corrección empieza por reconocer el valor, escuchar, reparar y elegir micro‑servicios visibles.</p>
-    <p class="mb-0"><strong>Acción inmediata:</strong> Identifica hoy una relación afectada y realiza un acto concreto de dignificación (saludo cálido por nombre, escucha sin interrupción, disculpa específica o servicio sencillo).</p>
+<div class="mb-2">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <strong>Advertencia sobre falta de empatía:</strong>
+            <div class="small text-muted">(ocultar/mostrar)</div>
+        </div>
+        <div>
+            <button class="btn btn-sm btn-outline-danger" type="button" @onclick="Toggle" aria-expanded="@panelOpen.ToString().ToLower()" aria-controls="@panelId">
+                @((panelOpen) ? "Ocultar" : "Ver")
+            </button>
+        </div>
+    </div>
+
+    <div id="@panelId" class="@(panelOpen ? "collapse show mt-2" : "collapse mt-2")" role="region" aria-labelledby="@panelId">
+        <div class="alert alert-danger small" role="note">
+            <p class="mb-1">Cuando se manifiesta indiferencia, desinterés, invalidación, uso utilitario de personas o postergación crónica de presencia y cuidado, no solo se afecta el bienestar ajeno: se <strong>desobedecen mandatos centrales</strong> que orientan una vida de amor.</p>
+            <ul class="mb-1">
+                <li>
+                    <strong>Amar a Dios:</strong>
+                    Ignorar dignidad de una persona creada por Él revela incoherencia entre adoración y práctica diaria.
+                    <div class="mt-1"><BibleVerseByRef Reference="Mateo 22:37-39" FallbackTag="amor" MostrarSelectorVersion="true" /></div>
+                </li>
+                <li>
+                    <strong>Amar al prójimo como a uno mismo:</strong>
+                    La falta de empatía niega cuidados básicos (escucha, atención, paciencia) que uno sí desea recibir. Es un quiebre activo del segundo mandamiento.
+                    <div class="mt-1"><BibleVerseByRef Reference="Mateo 22:37-39" FallbackTag="amor" MostrarSelectorVersion="true" /></div>
+                </li>
+                <li>
+                    <strong>Considerar a los demás como superiores:</strong>
+                    Actitudes egocéntricas y respuestas frías priorizan comodidad propia sobre necesidad concreta ajena; se invierte el orden de humildad enseñado.
+                    <div class="mt-1"><BibleVerseByRef Reference="Filipenses 2:3-4" FallbackTag="humildad" MostrarSelectorVersion="true" /></div>
+                </li>
+            </ul>
+            <p class="mb-1">Persistir en patrones de no empatía forma hábitos que oscurecen sensibilidad espiritual y moral. La corrección empieza por reconocer el valor, escuchar, reparar y elegir micro‑servicios visibles.</p>
+            <p class="mb-0"><strong>Acción inmediata:</strong> Identifica hoy una relación afectada y realiza un acto concreto de dignificación (saludo cálido por nombre, escucha sin interrupción, disculpa específica o servicio sencillo).</p>
+        </div>
+    </div>
 </div>
+
+@code {
+    // Genera un id único por instancia para evitar colisiones cuando el componente se use varias veces en la misma página
+    private string panelId = "lackEmpathyPanel_" + System.Guid.NewGuid().ToString("N");
+    private bool panelOpen = false;
+
+    private void Toggle()
+    {
+        panelOpen = !panelOpen;
+    }
+}

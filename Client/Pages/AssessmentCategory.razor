@@ -133,8 +133,6 @@ else
                     var label = a == true ? "Sí" : (a == false ? "No" : "Sin responder");
                     var badgeClass = a == true ? "bg-danger" : (a == false ? "bg-success" : "bg-secondary");
                     var verseRef = GetVerseForQuestion(q, category.Id);
-                    var verseHighlight = IsLoveNeighborHighlight(verseRef);
-                    var verse = BibleVerseProvider.GetByReference(verseRef);
                     <div class="list-group-item">
                         <div class="d-flex justify-content-between">
                             <div>
@@ -154,13 +152,10 @@ else
                                 {
                                     <div class="small text-muted mt-1">@q.Example</div>
                                 }
-                                @if (verse is not null)
+                                @if (!string.IsNullOrWhiteSpace(verseRef))
                                 {
                                     <div class="small mt-2">
-                                        <span class="badge @(verseHighlight ? "bg-warning text-dark" : "bg-light text-muted")">Versículo</span>
-                                        <span class="ms-2"><strong>@verse.Reference</strong> <span class="text-muted">(@verse.Version)</span></span>
-                                        <div class="mt-1">@verse.Text</div>
-                                        <div class="text-muted">@verse.Summary</div>
+                                        <BibleVerseByRef Reference="@verseRef" FallbackTag="amor" />
                                     </div>
                                 }
                             </div>

@@ -418,9 +418,8 @@
     {
         <div class="alert alert-light border small">
             <strong>Versículo del día:</strong>
-            <div class="mt-1"><strong>@verseOfDay.Reference</strong> <span class="text-muted small">(@verseOfDay.Version)</span></div>
-            <div>@verseOfDay.Text</div>
-            <div class="text-muted small">@verseOfDay.Summary</div>
+            <!-- Se unifica visual usando el componente reusable con selector de versión -->
+            <BibleVerseByRef Reference="@verseOfDay.Reference" FallbackTag="amor" MostrarSelectorVersion="true" />
         </div>
     }
     <button class="btn btn-sm btn-outline-primary mb-2" @onclick="ScrollToTodayAsync">Ir al día de hoy</button>
