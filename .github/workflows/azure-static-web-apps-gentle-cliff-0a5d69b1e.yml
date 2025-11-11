@@ -53,6 +53,6 @@ jobs:
           skip_app_build: true
           skip_api_build: true
 
-      - name: Post-deploy: show summary
+      - name: "Post-deploy: show summary"
         run: |
           echo "Deployed branch $GITHUB_REF to Azure Static Web Apps"
