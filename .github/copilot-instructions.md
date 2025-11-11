@@ -65,41 +65,26 @@ This is an **Empathy Assessment Application** built with Blazor WebAssembly and 
 - **Content Language**: Most user-facing content is in Spanish. Maintain consistency with existing Spanish terminology and phrasing.
 
 - **Assessment Structure**:
-  - Categories: Groups of related empathy dimensions
-  - Questions: Specific behaviors or attitudes to assess
   - Daily Practices: Actionable, offline activities (no devices, money, or special conditions required)
 
 ### Azure Functions Best Practices
 
 - Use the **Isolated Worker Model** (`Microsoft.Azure.Functions.Worker`)
-- Functions use `HttpRequestData` and `HttpResponseData` (not `IActionResult`)
-- Authorization level is typically `Anonymous` for public endpoints
 - Use dependency injection via constructors for services like `ILogger`
 
 ### Common Patterns
 
 1. **Model initialization**: All models initialize properties to prevent null reference warnings
-2. **Razor component structure**: Page components typically include route, UI markup, and code block
-3. **Data structures**: Lists are initialized in constructors to empty collections
 
 ### File Organization
 
 - Place Razor pages in `Client/Pages/`
 - Place shared models in `Shared/` or `Shared/EmpathyAssessment/`
-- Azure Functions go in `Api/` with descriptive names ending in `Function.cs`
-- Static assets go in `Client/wwwroot/`
 
 ## Important Notes
 
 - **Build warnings**: There are existing nullable reference warnings in some Razor components. These are non-blocking and should be addressed when modifying those specific files.
 - **Configuration**: The API requires a `local.settings.json` file (copy from `local.settings.example.json`)
-- **Deployment**: Configured for Azure Static Web Apps via GitHub Actions workflow
-
-## Making Changes
-
-When contributing to this repository:
-
-1. Maintain the existing code style and conventions
 2. Keep Spanish content authentic and culturally appropriate
 3. Test locally using the Azure Static Web Apps CLI workflow
 4. Ensure nullable reference types are properly handled in new code
@@ -107,8 +92,11 @@ When contributing to this repository:
 6. Consider the empathy assessment domain context when designing features
 7. Documentar TODO miembro público con comentarios XML conforme a la sección de estilo (incluyendo excepciones lanzadas por los métodos).
 
-## Dependencies Management
+## Quality gate requirement
+Todos los cambios deben garantizar: 0 Errors, 0 Warnings, 0 Messages al compilar la solución. Se debe producir código de alta calidad y evitar la supresión de advertencias (`#pragma warning disable`) o cualquier otra forma de ocultar problemas. Si aparece una advertencia, debe resolverse mediante corrección del código o ajuste de tipos/contratos, no por supresión.
 
+Se pretende mantener la calidad del código alta y prevenir deuda técnica. Cualquier excepción a esta regla debe ser aprobada por el equipo principal y documentada en una issue en el repositorio.
+## Dependencies Management
 - Use only necessary NuGet packages
 - Keep versions aligned across projects where shared
 - Current key dependencies:
