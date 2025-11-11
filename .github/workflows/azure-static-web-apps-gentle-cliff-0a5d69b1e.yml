@@ -36,11 +36,14 @@ jobs:
           dotnet restore
           dotnet publish -c Release -f net10.0 -o ../client_publish
 
-      - name: Build API (publish)
+      - name: Build API (restore only)
         working-directory: Api
         run: |
           dotnet restore
-          dotnet publish -c Release -f net10.0 -o ../api_publish
+
+      - name: Publish API (pre-deploy)
+        run: |
+          dotnet publish Api/Api.csproj -c Release -f net10.0 -o api_publish
 
       - name: Build And Deploy
         id: builddeploy
@@ -49,8 +52,11 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_CLIFF_0A5D69B1E }}
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
-          app_location: "client_publish/wwwroot" # point directly to the published client folder that contains index.html
-          api_location: "api_publish" # point to the published API folder
+          # Deploy artifacts produced by dotnet publish (client + api)
+          app_location: "client_publish/wwwroot" # published client folder containing index.html
+          api_location: "api_publish" # prebuilt api artifact folder
+          app_artifact_location: "client_publish/wwwroot"
+          api_artifact_location: "api_publish"
           skip_app_build: true
           skip_api_build: true
 
