@@ -51,6 +51,7 @@ jobs:
           action: "upload"
           app_location: "Client" # App source code path
           api_location: "Api" # Api source code path - optional
+          output_location: "wwwroot" # Built app content directory - optional
           app_artifact_location: "client_publish/wwwroot" # Built app content directory
           api_artifact_location: "api_publish" # Built api content directory
           skip_app_build: true
