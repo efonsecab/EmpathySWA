@@ -17,7 +17,7 @@ jobs:
       DOTNET_GENERATE_ASPNET_CERTIFICATE: false
       DOTNET_ADD_GLOBAL_TOOLS_TO_PATH: false
       DOTNET_MULTILEVEL_LOOKUP: 0
-      PROJECT: "EmpathySWA/Client/Client.csproj"
+      PROJECT: "Client/Client.csproj"
       BUILD_CONFIG: "Release"
 
     steps:
@@ -42,7 +42,7 @@ jobs:
         run: dotnet publish ${{ env.PROJECT }} -c ${{ env.BUILD_CONFIG }} -o publish -f ${{ env.DOTNET_VERSION }} --no-build
 
       - name: Copy staticwebapp.config.json to Publish Folder
-        run: cp EmpathySWA/Client/staticwebapp.config.json publish/wwwroot/staticwebapp.config.json
+        run: cp Client/staticwebapp.config.json publish/wwwroot/staticwebapp.config.json
 
       - name: Deploy EmpathySWAProject to Azure Static Web App
         id: builddeploy
