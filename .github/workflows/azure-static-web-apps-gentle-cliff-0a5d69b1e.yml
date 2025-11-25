@@ -1,73 +1,56 @@
-name: Azure Static Web Apps CI/CD (net10)
+name: Deploy EmpathySWA to Azure
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - main
+      - upgrade-to-NET10
 
 jobs:
   build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    name: Build and deploy EmpathySWAProject
+    env:
+      DOTNET_VERSION: "net10.0"
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      DOTNET_NOLOGO: true
+      DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+      DOTNET_ADD_GLOBAL_TOOLS_TO_PATH: false
+      DOTNET_MULTILEVEL_LOOKUP: 0
+      PROJECT: "EmpathySWA/Client.csproj"
+      BUILD_CONFIG: "Release"
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout source
+        uses: actions/checkout@v4
         with:
           submodules: true
           lfs: false
 
-      - name: Setup .NET 10 SDK
-        uses: actions/setup-dotnet@v3
+      - name: Setup .NET 10.0
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: 10.0.x
 
-      - name: Setup Node (for SWA tooling)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      - name: Restore
+        run: dotnet restore ${{ env.PROJECT }}
 
-      - name: Build Blazor client (publish)
-        working-directory: Client
-        run: |
-          dotnet restore
-          dotnet publish -c Release -f net10.0 -o ../client_publish
+      - name: .NET Build
+        run: dotnet build ${{ env.PROJECT }} -c ${{ env.BUILD_CONFIG }} -f ${{ env.DOTNET_VERSION }} --no-restore
 
-      - name: Build API (restore only)
-        working-directory: Api
-        run: |
-          dotnet restore
+      - name: .NET Publish
+        run: dotnet publish ${{ env.PROJECT }} -c ${{ env.BUILD_CONFIG }} -o publish -f ${{ env.DOTNET_VERSION }} --no-build
 
-      - name: Publish API (pre-deploy)
-        run: |
-          dotnet publish Api/Api.csproj -c Release -f net10.0 -o api_publish
-
-      - name: Build And Deploy
+      - name: Deploy EmpathySWAProject to Azure Static Web App
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_CLIFF_0A5D69B1E }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          # Deploy artifacts produced by dotnet publish (client + api)
-          app_location: "client_publish/wwwroot" # published client folder containing index.html
-          api_location: "api_publish" # prebuilt api artifact folder
-          app_artifact_location: "client_publish/wwwroot"
-          api_artifact_location: "api_publish"
-          skip_app_build: true
+          app_location: "publish/wwwroot"
+          api_location: ""
+          output_location: "publish/wwwroot"
           skip_api_build: true
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GENTLE_CLIFF_0A5D69B1E }}
-          action: "close"
+          skip_app_build: true
+          production_branch: 'upgrade-to-NET10'
