@@ -5,38 +5,6 @@ using System.Linq;
 namespace BlazorApp.Shared.EmpathyAssessment
 {
     /// <summary>
-    /// Conjunto agregado de sugerencias empáticas derivadas de una o varias heridas emocionales relacionadas a patrones marcados en la evaluación.
-    /// Combina frases, micro-prácticas, acciones de apoyo, errores a evitar y prácticas de reparación para ofrecer respuesta concreta.
-    /// </summary>
-    public class SuggestionBundle
-    {
-        /// <summary>
-        /// Lista de identificadores de heridas que originan estas sugerencias (puede haber más de una por patrón observado).
-        /// </summary>
-        public List<string> WoundIds { get; set; } = new List<string>();
-        /// <summary>
-        /// Frases empáticas sugeridas para validar y acompañar.
-        /// </summary>
-        public List<string> Phrases { get; set; } = new List<string>();
-        /// <summary>
-        /// Micro-prácticas inmediatas (baja inversión de tiempo) recomendadas.
-        /// </summary>
-        public List<string> MicroPractices { get; set; } = new List<string>();
-        /// <summary>
-        /// Acciones empáticas de apoyo (más extensas o relacionales).
-        /// </summary>
-        public List<string> SupportActions { get; set; } = new List<string>();
-        /// <summary>
-        /// Errores frecuentes a evitar.
-        /// </summary>
-        public List<string> MistakesToAvoid { get; set; } = new List<string>();
-        /// <summary>
-        /// Prácticas de reparación que se pueden facilitar o promover.
-        /// </summary>
-        public List<string> RepairPractices { get; set; } = new List<string>();
-    }
-
-    /// <summary>
     /// Motor de sugerencias empáticas: mapea texto de preguntas marcadas como "Sí" a heridas emocionales relevantes y construye paquetes de guía práctica.
     /// Uso: pasar la lista de preguntas afirmadas y obtener un conjunto agregado de acciones y frases para acompañar mejor a otros.
     /// </summary>
@@ -97,7 +65,6 @@ namespace BlazorApp.Shared.EmpathyAssessment
             // Fallback: si ninguna coincidencia, incluir todas para ofrecer guía general (opcional)
             if (woundIds.Count == 0)
             {
-                // Podríamos optar por vacío, pero se da un paquete general para no dejar sin guía.
                 foreach (var w in EmotionalWoundData.Wounds) woundIds.Add(w.Id);
             }
 

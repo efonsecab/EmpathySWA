@@ -4,66 +4,6 @@ using System.Linq;
 namespace BlazorApp.Shared.EmpathyAssessment
 {
     /// <summary>
-    /// Representa una herida emocional primaria (rechazo, abandono, humillación, traición, injusticia) y su impacto en la empatía.
-    /// Contiene descripciones de origen, patrones defensivos, distorsiones relacionales y prácticas para acompañar con empatía.
-    /// </summary>
-    public class EmotionalWound
-    {
-        /// <summary>
-        /// Identificador único (slug) para ruteo y búsqueda. Ej: "rechazo".
-        /// </summary>
-        public string Id { get; set; } = string.Empty;
-        /// <summary>
-        /// Nombre visible de la herida emocional.
-        /// </summary>
-        public string Name { get; set; } = string.Empty;
-        /// <summary>
-        /// Descripción breve del núcleo de la herida: qué sensación esencial produce.
-        /// </summary>
-        public string CoreDescription { get; set; } = string.Empty;
-        /// <summary>
-        /// Posibles orígenes típicos (experiencias comunes) que pueden contribuir al desarrollo de la herida.
-        /// </summary>
-        public List<string> CommonOrigins { get; set; } = new List<string>();
-        /// <summary>
-        /// Patrones defensivos frecuentes que pueden aparecer cuando la herida se activa.
-        /// </summary>
-        public List<string> DefensivePatterns { get; set; } = new List<string>();
-        /// <summary>
-        /// Distorsiones relacionales o creencias que afectan la interpretación de las acciones de otros cuando la herida está activa.
-        /// </summary>
-        public List<string> RelationalDistortions { get; set; } = new List<string>();
-        /// <summary>
-        /// Señales internas o externas (emocionales, físicas, cognitivas, conductuales) que podrías observar cuando se activa la herida.
-        /// </summary>
-        public List<string> ActivationSignals { get; set; } = new List<string>();
-        /// <summary>
-        /// Preguntas de reflexión para quien acompaña: ayudan a mantener una actitud empática hacia la persona herida.
-        /// </summary>
-        public List<string> ReflectionQuestions { get; set; } = new List<string>();
-        /// <summary>
-        /// Acciones concretas para acompañar con empatía a una persona cuya herida esté activa (qué hacer / cómo interactuar).
-        /// </summary>
-        public List<string> EmpathicSupportActions { get; set; } = new List<string>();
-        /// <summary>
-        /// Frases empáticas sugeridas (micro-validaciones) que pueden ayudar a reconocer la experiencia de la persona sin juzgar.
-        /// </summary>
-        public List<string> SupportPhrases { get; set; } = new List<string>();
-        /// <summary>
-        /// Errores frecuentes a evitar al acompañar (conductas que pueden reactivar o profundizar la herida).
-        /// </summary>
-        public List<string> MistakesToAvoid { get; set; } = new List<string>();
-        /// <summary>
-        /// Prácticas de reparación que puedes promover o facilitar en la persona, sin imponer ni controlar su proceso.
-        /// </summary>
-        public List<string> RepairPractices { get; set; } = new List<string>();
-        /// <summary>
-        /// Micro-prácticas inmediatas (30-120 segundos) que cualquier persona puede aplicar en el momento para generar seguridad empática.
-        /// </summary>
-        public List<string> MicroPractices { get; set; } = new List<string>();
-    }
-
-    /// <summary>
     /// Proveedor estático de datos sobre las cinco heridas emocionales y sus guías empáticas.
     /// </summary>
     public static class EmotionalWoundData
@@ -87,7 +27,7 @@ namespace BlazorApp.Shared.EmpathyAssessment
                 SupportPhrases = new List<string>{ "Gracias por estar aquí, tu presencia importa.", "¿Te gustaría sumarte a esto? Si no, igual seguimos contando contigo.", "Veo tu aporte y quiero reconocerlo.", "Si algo te hizo sentir fuera, avísame para corregirlo.", "Tu perspectiva suma, compártela cuando quieras." },
                 MistakesToAvoid = new List<string>{ "Burlarse de la sensibilidad", "Ignorar sistemáticamente sus mensajes", "Comparar negativamente con otra persona", "Presionar para que hable sin crear seguridad", "Hacer bromas internas excluyentes frente a la persona" },
                 RepairPractices = new List<string>{ "Proponer espacios seguros de participación (turnos de palabra)", "Validar emociones antes de debatir ideas", "Celebrar contribuciones específicas en público o en privado", "Fomentar micro-acciones de pertenencia (saludo por nombre)", "Acordar rituales simples de bienvenida e integración" },
-                MicroPractices = new List<string>{ "Saludar por su nombre mirando a los ojos", "Hacer una pregunta abierta breve sobre su opinión", "Reflejar una idea que expresó para mostrar escucha", "Enviar mensaje corto de ‘aquí estoy’", "Invitar a una micro-tarea compartida (ej: revisar algo juntos 1 minuto)" }
+                MicroPractices = new List<string>{ "Saludar por su nombre mirando a los ojos", "Hacer una pregunta abierta breve sobre su opinión", "Reflejar una idea que expresó para mostrar escucha", "Enviar mensaje corto de ‘aquí estoy'", "Invitar a una micro-tarea compartida (ej: revisar algo juntos 1 minuto)" }
             },
             new EmotionalWound
             {

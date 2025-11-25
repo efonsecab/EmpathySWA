@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div class="@NavMenuCssClass nav-scrollable">
+<div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column px-2 py-2">
         <div class="nav-item mb-2">
             <NavLink class="nav-link d-flex align-items-center" href="" Match="NavLinkMatch.All">
@@ -52,6 +52,13 @@
         </div>
 
         <div class="nav-item mb-2">
+            <NavLink class="nav-link d-flex align-items-center" href="https://relaciones.pticostarica.com/" target="_blank">
+                <span class="bi bi-heart me-2" aria-hidden="true"></span>
+                <span>Relaciones (Externo)</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item mb-2">
             <NavLink class="nav-link d-flex align-items-center" href="categoria-heridas">
                 <span class="bi bi-activity me-2" aria-hidden="true"></span>
                 <span>Heridas y reparación</span>
@@ -69,6 +76,13 @@
             <NavLink class="nav-link d-flex align-items-center" href="explorar">
                 <span class="bi bi-grid-3x3-gap me-2" aria-hidden="true"></span>
                 <span>Explorar</span>
+            </NavLink>
+        </div>
+
+        <div class="nav-item mb-2">
+            <NavLink class="nav-link d-flex align-items-center" href="autovalidacion-diaria">
+                <span class="bi bi-star me-2" aria-hidden="true"></span>
+                <span>Autovalidación diaria</span>
             </NavLink>
         </div>
 
