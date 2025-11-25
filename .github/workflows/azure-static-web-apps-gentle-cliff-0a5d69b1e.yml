@@ -3,7 +3,7 @@ name: Deploy EmpathySWA to Azure
 on:
   push:
     branches:
-      - upgrade-to-NET10
+      - main
 
 jobs:
   build_and_deploy_job:
@@ -56,4 +56,5 @@ jobs:
           output_location: "publish/wwwroot"
           skip_api_build: true
           skip_app_build: true
-          production_branch: 'upgrade-to-NET10'
+          production_branch: 'main'
+
