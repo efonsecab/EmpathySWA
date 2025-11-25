@@ -1,0 +1,56 @@
+@page "/empatia-en-la-era-de-los-deepfakes"
+
+<h1>Empatía en la era de los deepfakes</h1>
+
+<p>
+  Vivimos en una era donde la tecnología puede crear imágenes y videos que parecen reales pero no lo son.
+  Esto plantea retos importantes para la empatía: cómo escuchamos, en quién confiamos y cómo respondemos ante el
+  sufrimiento o la información que nos presenta la pantalla.
+</p>
+
+<h2>¿Qué es un deepfake?</h2>
+<p>
+  Un <strong>deepfake</strong> es una pieza de contenido audiovisual generada o manipulada por inteligencia artificial
+  que puede hacer que una persona parezca decir o hacer algo que nunca ocurrió. Los deepfakes pueden ser usados
+  para el entretenimiento, la desinformación o el daño personal.
+</p>
+
+<h2>Impacto en la empatía</h2>
+<ul>
+  <li>Dificulta distinguir experiencias reales de fabricadas, lo que puede erosionar la confianza entre personas.</li>
+  <li>Puede amplificar heridas emocionales cuando se usan para acosar o difamar a alguien.</li>
+  <li>Nos empuja a ser más críticos sin perder la capacidad de conectar emocionalmente con el otro.</li>
+</ul>
+
+<h2>Cómo responder con empatía</h2>
+<ol>
+  <li>Verifica antes de reaccionar: valida la fuente y busca contexto.</li>
+  <li>Preserva la dignidad: si compartes una historia sensible, prioriza el bienestar de la persona afectada.</li>
+  <li>Escucha y pregunta: cuando una persona relata algo difícil, confía en su experiencia y haz preguntas abiertas.</li>
+</ol>
+
+<h2>Prácticas diarias</h2>
+<ul>
+  <li>Desconéctate periódicamente para mantener la perspectiva humana fuera de las pantallas.</li>
+  <li>Aprende señales básicas de desinformación y deepfakes para proteger a tu comunidad.</li>
+  <li>Fomenta conversaciones donde la veracidad y la compasión coexistan: pregunta antes de juzgar.</li>
+</ul>
+
+<h2>Reflexión personal</h2>
+<p>Escribe una breve reflexión sobre cómo te hace sentir consumir contenido potencialmente manipulado:</p>
+<textarea @bind="reflection" rows="4" cols="60"></textarea>
+<br />
+<button class="btn btn-primary" @onclick="SaveReflection">Guardar reflexión</button>
+<p style="color:green">@savedMessage</p>
+
+@code {
+    // Descripción: estado local para la reflexión del usuario
+    private string reflection = string.Empty;
+    private string savedMessage = string.Empty;
+
+    private void SaveReflection()
+    {
+        // Guardado local temporal; en futuras iteraciones se podría persistir en el backend
+        savedMessage = string.IsNullOrWhiteSpace(reflection) ? "Escribe una reflexión antes de guardar." : "Reflexión guardada localmente.";
+    }
+}
